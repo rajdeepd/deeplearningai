@@ -3,7 +3,7 @@ layout: default
 title: Language Models
 nav_order: 1
 description: "Language Models for Prompts"
-# parent: ChatGPT
+parent: ChatGPT
 ---
 
 # Chat GPT Course
@@ -93,10 +93,7 @@ description: "Language Models for Prompts"
 
 <img src="/deeplearningai/images/Screenshot_2023-06-04_at_10.49.47_AM.png" width="80%" />
 
-<img src="/deeplearningai/images/Screenshot_2023-06-04_at_10.50.47_AM.png" width="80%" />
-
 <img src="/deeplearningai/images/Screenshot_2023-06-04_at_10.51.35_AM.png" width="80%" />
 
 <img src="/deeplearningai/images/Screenshot_2023-06-04_at_10.51.51_AM.png" width="80%" />
 
-<img src="/deeplearningai/images/Screenshot_2023-06-04_at_10.52.08_AM.png" width="80%" />
