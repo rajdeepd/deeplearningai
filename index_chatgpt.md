@@ -50,4 +50,34 @@ permalink: /
 
 <img src="/deeplearningai/images/Screenshot_2023-06-03_at_10.28.57_AM.png" width="80%" />
 
+<img src="/deeplearningai/images/Screenshot_2023-06-03_at_11.07.53_PM.png" width="80%" />
+
+<img src="/deeplearningai/images/Screenshot_2023-06-03_at_11.08.00_PM.png" width="80%" />
+
+<img src="/deeplearningai/images/Screenshot_2023-06-04_at_10.22.54_AM.png" width="80%" />
+
+<img src="/deeplearningai/images/Screenshot_2023-06-04_at_10.23.02_AM.png" width="80%" />
+
+<img src="/deeplearningai/images/Screenshot_2023-06-04_at_10.23.26_AM.png" width="80%" />
+
+<img src="/deeplearningai/images/Screenshot_2023-06-04_at_10.24.01_AM.png" width="80%" />
+
+<img src="/deeplearningai/images/Screenshot_2023-06-04_at_10.24.13_AM.png" width="80%" />
+
+<img src="/deeplearningai/images/Screenshot_2023-06-04_at_10.24.21_AM.png" width="80%" />
+
+<img src="/deeplearningai/images/Screenshot_2023-06-04_at_10.24.27_AM.png" width="80%" />
+
+<img src="/deeplearningai/images/Screenshot_2023-06-04_at_10.24.32_AM.png" width="80%" />
+
+<img src="/deeplearningai/images/Screenshot_2023-06-04_at_10.24.41_AM.png" width="80%" />
+
+<img src="/deeplearningai/images/Screenshot_2023-06-04_at_10.25.00_AM.png" width="80%" />
+
+<img src="/deeplearningai/images/Screenshot_2023-06-04_at_10.25.15_AM.png" width="80%" />
+
+<img src="/deeplearningai/images/Screenshot_2023-06-04_at_10.25.38_AM.png" width="80%" />
+
+<img src="/deeplearningai/images/Screenshot_2023-06-04_at_10.26.13_AM.png" width="80%" />
+
 
