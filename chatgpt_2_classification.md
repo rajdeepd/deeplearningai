@@ -6,18 +6,123 @@ description: "Language Models for Prompts"
 parent: ChatGPT
 ---
 
-<img src="/deeplearningai/images/Screenshot_2023-06-04_at_8.45.36_PM.png" width="80%" />
+# Evaluate Inputs: Classification
 
-<img src="/deeplearningai/images/Screenshot_2023-06-04_at_8.46.51_PM.png" width="80%" />
+In this section we will look at how to handle multiple instructions. It might be useful to classify the instructions first and then proceed with the subsequent response.
 
-<img src="/deeplearningai/images/Screenshot_2023-06-04_at_8.48.02_PM.png" width="80%" />
+## Setup
 
-<img src="/deeplearningai/images/Screenshot_2023-06-04_at_8.48.14_PM.png" width="80%" />
+#### Load the API key and relevant Python libaries.
 
-<img src="/deeplearningai/images/Screenshot_2023-06-04_at_8.48.24_PM.png" width="80%" />
+In this course, we've provided some code that loads the OpenAI API key for you.
 
-<img src="/deeplearningai/images/Screenshot_2023-06-04_at_8.48.34_PM.png" width="80%" />
 
-<img src="/deeplearningai/images/Screenshot_2023-06-04_at_8.48.43_PM.png" width="80%" />
+```python
+import os
+import openai
+from dotenv import load_dotenv, find_dotenv
+_ = load_dotenv(find_dotenv()) # read local .env file
 
-<img src="/deeplearningai/images/Screenshot_2023-06-04_at_8.49.19_PM.png" width="80%" />
+openai.api_key  = os.environ['OPENAI_API_KEY']
+```
+
+
+```python
+def get_completion_from_messages(messages, 
+                                 model="gpt-3.5-turbo", 
+                                 temperature=0, 
+                                 max_tokens=500):
+    response = openai.ChatCompletion.create(
+        model=model,
+        messages=messages,
+        temperature=temperature, 
+        max_tokens=max_tokens,
+    )
+    return response.choices[0].message["content"]
+```
+
+#### Classify customer queries to handle different cases
+
+
+```python
+delimiter = "####"
+system_message = f"""
+You will be provided with customer service queries. \
+The customer service query will be delimited with \
+{delimiter} characters.
+Classify each query into a primary category \
+and a secondary category. 
+Provide your output in json format with the \
+keys: primary and secondary.
+
+Primary categories: Billing, Technical Support, \
+Account Management, or General Inquiry.
+
+Billing secondary categories:
+Unsubscribe or upgrade
+Add a payment method
+Explanation for charge
+Dispute a charge
+
+Technical Support secondary categories:
+General troubleshooting
+Device compatibility
+Software updates
+
+Account Management secondary categories:
+Password reset
+Update personal information
+Close account
+Account security
+
+General Inquiry secondary categories:
+Product information
+Pricing
+Feedback
+Speak to a human
+
+"""
+user_message = f"""\
+I want you to delete my profile and all of my user data"""
+messages =  [  
+{'role':'system', 
+ 'content': system_message},    
+{'role':'user', 
+ 'content': f"{delimiter}{user_message}{delimiter}"},  
+] 
+response = get_completion_from_messages(messages)
+print(response)
+```
+
+Response to the above query will lead to classification intro primary and secondary categories.
+
+```json
+{
+  "primary": "Account Management",
+  "secondary": "Close account"
+}
+```
+
+
+
+
+```python
+user_message = f"""\
+Tell me more about your flat screen tvs"""
+messages =  [  
+{'role':'system', 
+ 'content': system_message},    
+{'role':'user', 
+ 'content': f"{delimiter}{user_message}{delimiter}"},  
+] 
+response = get_completion_from_messages(messages)
+print(response)
+```
+Let us try another generic query, reponse is listed below:
+
+```json
+{
+  "primary": "General Inquiry",
+  "secondary": "Product information"
+}
+```
