@@ -550,12 +550,12 @@ On asking about "TechPro Ultrabook", you will get following output
 ```python
 {'name': 'TechPro Ultrabook', 'category': 'Computers and Laptops', 'brand': 'TechPro', 'model_number': 'TP-UB100', 'warranty': '1 year', 'rating': 4.5, 'features': ['13.3-inch display', '8GB RAM', '256GB SSD', 'Intel Core i5 processor'], 'description': 'A sleek and lightweight ultrabook for everyday use.', 'price': 799.99}
 ```
-And on asking about TechPro Ultrabook you will get the following output
+
+And let us get all products by category
 
 ```python
-print(get_product_by_name("TechPro Ultrabook"))
+print(get_products_by_category("Computers and Laptops"))
 ```
-
 Response 
 
 ```python
@@ -563,6 +563,175 @@ Response
 ...
  {'name': 'BlueWave Chromebook', 'category': 'Computers and Laptops', 'brand': 'BlueWave', 'model_number': 'BW-CB100', 'warranty': '1 year', 'rating': 4.1, 'features': ['11.6-inch display', '4GB RAM', '32GB eMMC', 'Chrome OS'], 'description': 'A compact and affordable Chromebook for everyday tasks.', 'price': 249.99}]
 ```
+Let us continue our example and print the user message
+
+```python
+print(user_message_1)
+```
+```
+tell me about the smartx pro phone and  the fotosnap camera, the dslr one.  Also tell me about your tvs 
+```
+
+Initial message from the model was
+
+```python
+print(category_and_product_response_1)
+```
+
+```
+[
+    {'category': 'Smartphones and Accessories', 'products': ['SmartX ProPhone']},
+    {'category': 'Cameras and Camcorders', 'products': ['FotoSnap DSLR Camera']},
+    {'category': 'Televisions and Home Theater Systems'}
+]
+```
+Output will be used as input to helper functions we just wrote. If the `input_string` is `None` it will return `None`. try execept block to catch the errors. We will replace the single quotes with double quotes and then call `json.loads` on the string.
+
+
+```python
+import json 
+
+def read_string_to_list(input_string):
+    if input_string is None:
+        return None
+
+    try:
+        input_string = input_string.replace("'", "\"")  # Replace single quotes with double quotes for valid JSON
+        data = json.loads(input_string)
+        return data
+    except json.JSONDecodeError:
+        print("Error: Invalid JSON string")
+        return None   
+```
+Let us run it on `category_and_product_response_1`. Output will be
+
+
+```
+[{'category': 'Smartphones and Accessories', 'products': ['SmartX ProPhone']}, {'category': 'Cameras and Camcorders', 'products': ['FotoSnap DSLR Camera']}, {'category': 'Televisions and Home Theater Systems'}]
+```
+Next we are going to create a helper function to generate output string which can be added to the prompt
+
+```python
+def generate_output_string(data_list):
+    output_string = ""
+
+    if data_list is None:
+        return output_string
+
+    for data in data_list:
+        try:
+            if "products" in data:
+                products_list = data["products"]
+                for product_name in products_list:
+                    product = get_product_by_name(product_name)
+                    if product:
+                        output_string += json.dumps(product, indent=4) + "\n"
+                    else:
+                        print(f"Error: Product '{product_name}' not found")
+            elif "category" in data:
+                category_name = data["category"]
+                category_products = get_products_by_category(category_name)
+                for product in category_products:
+                    output_string += json.dumps(product, indent=4) + "\n"
+            else:
+                print("Error: Invalid object format")
+        except Exception as e:
+            print(f"Error: {e}")
+
+    return output_string 
+```
+
+We will pass `category_and_product_list` create above to this helper function and print it.
+
+```python
+product_information_for_user_message_1 = generate_output_string(category_and_product_list)
+print(product_information_for_user_message_1)
+
+```
+Output which is product information for the product mentioned in the user message is shown below:
+
+```
+{
+    "name": "SmartX ProPhone",
+    "category": "Smartphones and Accessories",
+    "brand": "SmartX",
+    "model_number": "SX-PP10",
+    "warranty": "1 year",
+    "rating": 4.6,
+    "features": [
+        "6.1-inch display",
+        "128GB storage",
+        "12MP dual camera",
+        "5G"
+    ],
+    "description": "A powerful smartphone with advanced camera features.",
+    "price": 899.99
+}
+....
+{
+    "name": "CineView OLED TV",
+    "category": "Televisions and Home Theater Systems",
+    "brand": "CineView",
+    "model_number": "CV-OLED55",
+    "warranty": "2 years",
+    "rating": 4.7,
+    "features": [
+        "55-inch display",
+        "4K resolution",
+        "HDR",
+        "Smart TV"
+    ],
+    "description": "Experience true blacks and vibrant colors with this OLED TV.",
+    "price": 1499.99
+}
+
+```
+At this point we have found the relevant product information. Now it is time for the model to actually answer the question.
+
+
+
+```python
+system_message = f"""
+You are a customer service assistant for a \
+large electronic store. \
+Respond in a friendly and helpful tone, \
+with very concise answers. \
+Make sure to ask the user relevant follow up questions.
+"""
+user_message_1 = f"""
+tell me about the smartx pro phone and \
+the fotosnap camera, the dslr one. \
+Also tell me about your tvs"""
+messages =  [  
+{'role':'system',
+ 'content': system_message},   
+{'role':'user',
+ 'content': user_message_1},  
+{'role':'assistant',
+ 'content': f"""Relevant product information:\n\
+ {product_information_for_user_message_1}"""},   
+]
+final_response = get_completion_from_messages(messages)
+print(final_response)
+```
+
+Final output is shown below
+
+
+```
+The SmartX ProPhone has a 6.1-inch display, 128GB storage, 12MP dual camera, and 5G. The FotoSnap DSLR Camera has a 24.2MP sensor, 1080p video, 3-inch LCD, and interchangeable lenses. We have a variety of TVs, including the CineView 4K TV with a 55-inch display, 4K resolution, HDR, and smart TV features. We also have the SoundMax Home Theater system with 5.1 channel, 1000W output, wireless subwoofer, and Bluetooth. Do you have any specific questions about these products or any other products we offer?
+```
+
+## Summary
+
+We saw how chaining of prompts leads to simplified.
+
+- It is **More Focused** (breaks down a complex task)
+- **Context Limitations** (Max tokens for input prompt and output response)
+- **Reduced Costs** as we need to pay per token
+
+
+
 
 
 
