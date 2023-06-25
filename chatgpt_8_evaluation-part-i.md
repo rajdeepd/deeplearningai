@@ -89,7 +89,7 @@ products_and_category
 
 Output
 
-```json
+```text
 {'Computers and Laptops': ['TechPro Ultrabook',
   'BlueWave Gaming Laptop',
   'PowerLite Convertible',
@@ -193,7 +193,7 @@ print(products_by_category_0)
 
 Output recieved is listed blow. It returns all the TVs and Home theatre systems.
 
-```json
+```text
 
 [{'category': 'Televisions and Home Theater Systems', 'products': ['CineView 4K TV', 'SoundMax Home Theater', 'CineView 8K TV', 'SoundMax Soundbar', 'CineView OLED TV']}]
 ```
@@ -210,7 +210,7 @@ print(products_by_category_1)
 
 ```
 
-```json
+```text
 [{'category': 'Smartphones and Accessories', 'products': ['MobiTech PowerCase', 'MobiTech Wireless Charger', 'SmartX EarBuds']}]
 ```
 
@@ -229,7 +229,7 @@ products_by_category_2 = find_category_and_product_v1(customer_msg_2,
 products_by_category_2
 ```
 
-```json
+```text
 [{'category': 'Computers and Laptops', 'products': ['TechPro Ultrabook', 'BlueWave Gaming Laptop', 'PowerLite Convertible', 'TechPro Desktop', 'BlueWave Chromebook']}]
 ```
 
@@ -245,7 +245,7 @@ products_by_category_3 = find_category_and_product_v1(customer_msg_3,
 print(products_by_category_3)
 ```
 
-```json
+```text
 [{'category': 'Smartphones and Accessories', 'products': ['SmartX ProPhone']},{'category': 'Cameras and Camcorders', 'products': ['FotoSnap DSLR Camera']}]
     
 [{'category': 'Televisions and Home Theater Systems', 'products': ['CineView 4K TV', 'SoundMax Home Theater', 'CineView 8K TV', 'SoundMax Soundbar', 'CineView OLED TV']}]
@@ -284,7 +284,7 @@ print(products_by_category_4)
 
 Output
 
-```json
+```text
 [{'category': 'Televisions and Home Theater Systems', 'products': ['CineView 8K TV']},
      {'category': 'Gaming Consoles and Accessories', 'products': ['GameSphere X']},
      {'category': 'Computers and Laptops', 'products': ['BlueWave Chromebook']}]
@@ -388,7 +388,7 @@ can tell that if I had to copy-paste 5 prompts, customers such as 0, 1, 2, 3, an
 products. You can kind of do it. I can look at this and go, "Yep, category, TV and home theater systems, products.
 
 
-```json
+```text
 [{'category': 'Smartphones and Accessories', 'products': ['SmartX ProPhone']}, {'category': 'Cameras and Camcorders', 'products': ['FotoSnap DSLR Camera']}, {'category': 'Televisions and Home Theater Systems', 'products': ['CineView 4K TV', 'SoundMax Home Theater', 'CineView 8K TV', 'SoundMax Soundbar', 'CineView OLED TV']}]
 ```
 
