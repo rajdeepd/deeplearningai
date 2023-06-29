@@ -226,7 +226,57 @@ specify an ideal response. So here, I'm going to specify a test
 example where the customer message is, "tell me 
 about the smartx pro phone", and so on. 
 And here's an ideal answer. So this is if you have an expert human 
-customer service representative write a really good answer
+customer service representative write a really good answer.
+
+The expert says, this would be a great answer., "Of course! The SmartX ProPhone is a.". It goes on to give a lot of helpful information. 
+Now, it is unreasonable to expect any LLM to generate this exact answer word for word. And in classical natural language processing 
+techniques, there are some traditional metrics for measuring if the LLM output is similar to this expert human written outputs. For example, there's something called the BLEU score, BLEU, that you can search online to read more about. They can measure how similar one piece of text is from another. But it turns out there's an even better way, which is you can use a prompt, which I'm going to specify here, to ask an LLM to compare how well the automatically generated customer service agent output corresponds to the ideal expert response that was written by a human that I just showed up above. 
+Here's the prompt we can use, which is. We're going to use an LLM and tell it to be an assistant that evaluates how well the 
+customer service agent answers a user question by comparing the response, that was the automatically generated one, to the ideal (expert) human written response. 
+
+So we're going to give it the data, which is what was the customer request, what 
+is the expert written ideal response, and then what did our 
+LLM actually output. 
+And this rubric comes from the OpenAI open source evals framework, 
+which is a fantastic framework with many evaluation methods 
+contributed both by OpenAI developers and 
+by the broader open source community. 
+In fact, if you want you could contribute an eval to 
+that framework yourself to help others evaluate their Large 
+Language Model outputs. 
+So in this rubric, we tell the LLM to, 
+"Compare the factual content of the submitted answer 
+with the expert answer. Ignore any differences in style, 
+grammar, or punctuation.". 
+And feel free to pause the video and 
+read through this in detail, but the key is we ask it to 
+carry the comparison and output a score from A to E, 
+depending on whether the "submitted answer is a 
+subset of the expert answer and is fully consistent", 
+versus the "submitted answer is a superset of the expert answer 
+and is fully consistent with it". This might mean it hallucinated or 
+made up some additional facts. 
+"Submitted answer contains all the details as the expert 
+answer.", whether there's disagreement or whether "the 
+answers differ, but these differences don't matter 
+from the perspective of factuality". 
+And the LLM will pick whichever of these seems to be the 
+most appropriate description. So here's the assistant answer that 
+we had just now. I think it's a pretty good answer, but now let's see what 
+the things when it compares the assistant answer to test 
+set ID. Oh, looks like it got an A. 
+And so it thinks "The submitted answer is 
+a subset of the expert answer and is 
+fully consistent with it", and that sounds right to me. 
+This assistant answer is much shorter than the 
+long expert answer up top, but it does hopefully is consistent. 
+Once again, I'm using GPT-3.5 Turbo in this example, but to get 
+a more rigorous evaluation, it might make sense to use GPT-4 in your own 
+application. 
+Now, let's try something totally different. I'm 
+going to have a very different assistant answer, "life is 
+like a box of chocolates", quote from a movie called "Forrest Gump". 
+ 
 
 ```python
 def eval_vs_ideal(test_set, assistant_answer):
@@ -278,7 +328,7 @@ print(assistant_answer)
 ```
 
 
-```codeblock
+```
 Sure! Let me provide you with some information about the SmartX ProPhone and the FotoSnap DSLR Camera.
 
 The SmartX ProPhone is a powerful smartphone with advanced camera features. It has a 6.1-inch display, 128GB storage, a 12MP dual camera, and supports 5G connectivity. The SmartX ProPhone is priced at $899.99 and comes with a 1-year warranty.
@@ -287,3 +337,13 @@ The FotoSnap DSLR Camera is a versatile camera that allows you to capture stunni
 
 As for TVs and TV-related products, we have a variety of options available. Some of our popular TV models include the CineView 4K TV, CineView 8K TV, and CineView OLED TV. We also have home theater systems like the SoundMax Home Theater and SoundMax Soundbar. Each product has its own unique features and price points. Is there a specific TV or TV-related product you are interested in?
 ```
+
+And if we were to evaluate that it outputs D and it concludes that, 
+"there is a disagreement between the submitted answer", life is like a box of chocolate and the expert answer. 
+So it correctly assesses this to be a pretty terrible answer. And so that's it. I hope you take away from 
+this section two design patterns. 
+First is, even without an expert provided ideal answer, if you can write a rubric, you can use one 
+LLM to evaluate another LLM's output. And second, if you can provide an expert provided ideal answer, 
+then that can help your LLM better compare if, and if a specific assistant output is similar to the expert provided ideal answer. I hope that helps you to evaluate your LLM systems 
+outputs. 
+So that both during development as well as when the system is running and you're getting responses, you can continue to monitor its performance and also have these tools to continuously evaluate and keep on improving the performance of your system. 
