@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Evaluation Part 1"
-nav_order: 7
+nav_order: 9
 description: "Evaluation Part 1"
 parent: ChatGPT
 ---

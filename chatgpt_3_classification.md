@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Classification"
-nav_order: 2
+nav_order: 3
 description: "Language Models for Prompts"
 parent: ChatGPT
 ---

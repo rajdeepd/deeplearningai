@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Process Inputs: Chaining Prompts"
-nav_order: 5
+nav_order: 6
 description: "Process Inputs: Chaining Prompts"
 parent: ChatGPT
 ---
