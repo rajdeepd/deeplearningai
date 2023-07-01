@@ -4,7 +4,7 @@ layout: default
 title: Introduction
 nav_order: 1
 description: "Introduction"
-parent:  GenAI with LLMs 
+parent:  Coursera - GenAI with LLMs 
 ---
 
 Welcome to this course on generative AI with large language models. Large language models or LLMs are a very exciting technology. But despite all the buzz and hype, one of the thing that is still underestimated by many people is their power as a developer too. Specifically, there are many machine learning and AI applications that used to take me many months to build that you can now build in days or maybe even small numbers of weeks. 
