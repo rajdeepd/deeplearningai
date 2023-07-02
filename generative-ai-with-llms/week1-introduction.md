@@ -1,21 +1,22 @@
-
 ---
 layout: default
-title: Week 1 Introduction
+title: Week 1 Intro
 nav_order: 1
-description: "Week 1 Introduction"
-parent: Week 1
+description: "Generative AI with Large Language Models"
+has_children: false
+parent: Week1
+grand_parent: Coursera - GenAI with LLMs 
 ---
 
-Welcome back. There's a lot of exciting material to go over this week, and one of the first topics that Mike will share with you in a little bit is a deep dive into how transformer networks actually work. >> Yeah, so look, it's a complicated topic, right? 
+There's a lot of exciting material to go over this week, and one of the first topics that Mike will share with you in a little bit is a deep dive into how transformer networks actually work.
 
-In 2017, the paper came out, Tension is all You Need, and it laid out all of these fairly complex data processes which are going to happen inside the transformer architecture. So we take a little bit of a high level view, but we do go down into some depths. We talk about things like self-attention and the multi-headed self-attention mechanism. So we can see why it is that these models actually work, how it is that they actually gain an understanding of language.  
+In 2017, the paper came out, Attention is all You Need, and it laid out all of these fairly complex data processes which are going to happen inside the transformer architecture. We will take a little bit of a high level view, but we do go down into some depths. We talk about things like self-attention and the multi-headed self-attention mechanism. So we can see why it is that these models actually work, how it is that they actually gain an understanding of language.  
 
-It is amazing how long the transformer architecture has been around and it's still state of the art for many models. >> I remember after I saw the transformer paper when it first came out, I thought, yep, I get this equation. I acknowledge this is a math equation. But what's it actually doing? And it's always seemed a little bit magical. It took me a long time playing with it to finally go, okay, this is why it works. 
+It is amazing how long the transformer architecture has been around and it's still state of the art for many models.
 
 In this first week, you learn the intuitions behind some of these terms you may have heard before, like multi-headed attention. What is that and why does it make sense? And why did the transformer architecture really take off? I think attention had been around for a long time, but actually thought it was, one of the things that really made to take off was it allowed attention to work in a massively parallel way. So it made it work on modern GPUs and could scale it up. I think these nuances around transformers are not well-understood by many, so looking forward to when you deep dive into that. 
 
-The scale is part of it and how it's able to take in all that data. I just want to say as well, though, that we're not going to go into this at such a level which is going to make people's heads explode. If they want to do that, then they can go ahead and read that paper too. What we're going to do is we're going to look at the really important parts of that transformer architecture that gives you the intuition you need so that you can actually make practical use out of these models. 
+The scale is part of it and how it's able to take in all that data. We are not going to go into this at such a level which is going to make people's heads explode. If they want to do that, then they can go ahead and read that paper too. What we're going to do is we're going to look at the really important parts of that transformer architecture that gives you the intuition you need so that you can actually make practical use out of these models. 
 
 One thing I've been surprised and delighted by is how transformers, even though this course focuses on text, it's been really interesting to see how that basic transformer architecture is creating a foundation for vision transformers as well. So even though in this course you learn mostly about large language models, models about text, Understanding transformers is also helping people understand this really exciting vision transformer and other modalities as well. It's going to be a really critical building block for a lot of machine learning. Beyond transformers, there's a second major topic that looking forward to having this first week cover, which is the Generative AI project Lifecycle. I know a lot of people are thinking, boy, does all this LM stuff, what I do of it? And the Generative AI project Lifecycle, which will talk about in a little bit, helps you plan out how to think about building your own Generative AI project. 
 
