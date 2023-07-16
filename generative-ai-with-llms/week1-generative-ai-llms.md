@@ -7,12 +7,7 @@ has_children: false
 parent: Week1
 grand_parent: Coursera - GenAI with LLMs 
 ---
-nav_order: 2
-description: "Generative AI with Large Language Models"
-has_children: false
-parent: Week1
-grand_parent: Coursera - GenAI with LLMs 
----
+
 
 # Generative AI & LLMs
 

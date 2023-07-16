@@ -8,6 +8,8 @@ parent: Week1
 grand_parent: Coursera - GenAI with LLMs 
 ---
 
+# Introduction
+
 There's a lot of exciting material to go over this week, and one of the first topics that Mike will share with you in a little bit is a deep dive into how transformer networks actually work.
 
 In 2017, the paper came out, Attention is all You Need, and it laid out all of these fairly complex data processes which are going to happen inside the transformer architecture. We will take a little bit of a high level view, but we do go down into some depths. We talk about things like self-attention and the multi-headed self-attention mechanism. So we can see why it is that these models actually work, how it is that they actually gain an understanding of language.  
