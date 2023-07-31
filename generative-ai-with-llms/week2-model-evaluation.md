@@ -35,13 +35,20 @@ For humans like us with squishy organic brains, we can see the similarities and 
 
 Before we start calculating metrics. Let's review some terminology. In the anatomy of language, a unigram is equivalent to a single word. A bigram is two words and n-gram is a group of n-words. Pretty straightforward stuff. 
 
-Screenshot_2023-07-31_at_7.08.32_PM.png
-Screenshot_2023-07-31_at_7.10.04_PM.png
-Screenshot_2023-07-31_at_7.10.30_PM.png
+<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-07-31_at_7.08.32_PM.png" width="80%" />
+
+
 
 ### LLM Evaluation - Metrics - ROUGE-1
 
-First, let's look at the ROUGE-1 metric. To do so, let's look at a human-generated reference sentence. It is cold outside and a generated output that is very cold outside. You can perform simple metric calculations similar to other machine-learning tasks using recall, precision, and F1. The recall metric measures the number of words or unigrams that are matched between the reference and the generated output divided by the number of words or unigrams in the reference. In this case, that gets a perfect score of one as all the generated words match words in the reference. Precision measures the unigram matches divided by the output size. The F1 score is the harmonic mean of both of these values.
+First, let's look at the ROUGE-1 metric. To do so, let's look at a human-generated reference sentence.
+
+<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-07-31_at_7.10.04_PM.png" width="80%" />
+
+It is cold outside and a generated output that is very cold outside. You can perform simple metric calculations similar to other machine-learning tasks using recall, precision, and F1. The recall metric measures the number of words or unigrams that are matched between the reference and the generated output divided by the number of words or unigrams in the reference. In this case, that gets a perfect score of one as all the generated words match words in the reference. Precision measures the unigram matches divided by the output size. 
+<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-07-31_at_7.10.30_PM.png" width="80%" />
+
+The F1 score is the harmonic mean of both of these values.
 
 
 
