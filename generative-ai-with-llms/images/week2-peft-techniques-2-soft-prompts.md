@@ -49,14 +49,18 @@ In full fine tuning, the training data set consists of input prompts and output 
 <img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-07_at_12.27.52_PM.png" width="80%" />
 <img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-07_at_12.28.25_PM.png" width="80%" />
 
-Prompt tuning is a very parameter efficient strategy because only a few parameters are being trained. In contrast with the millions to billions of parameters in full fine tuning, similar to what you saw with LoRA. You can train a different set of soft prompts for each task and then easily swap them out at inference time. You can train a set of soft prompts for one task and a different set for another. To use them for inference, you prepend your input prompt with the learned tokens to switch to another task, you simply change the soft prompt.
+Prompt tuning is a very parameter efficient strategy because only a few parameters are being trained. 
+
+<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-07_at_12.28.32_PM.png" width="80%" />
+
+In contrast with the millions to billions of parameters in full fine tuning, similar to what you saw with LoRA. You can train a different set of soft prompts for each task and then easily swap them out at inference time. You can train a set of soft prompts for one task and a different set for another. To use them for inference, you prepend your input prompt with the learned tokens to switch to another task, you simply change the soft prompt.
 
 ## Performance of prompt tuning
 
 Soft prompts are very small on disk, so this kind of fine tuning is extremely efficient and flexible. You'll notice the same LLM is used for all tasks, all you have to do is switch out the soft prompts at inference time. 
-<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-07_at_12.28.32_PM.png" width="80%" />
 
-<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-07_at_4.35.03_PM.png" width="80%" />
+
+
 
 
 So how well does prompt tuning perform? In the original paper, Exploring the Method by Brian Lester and collaborators at Google. 
@@ -66,4 +70,8 @@ Brian Lester, Rami Al-Rfou Noah Constant, Google Research]( https://arxiv.org/pd
 
 ## Interpretability of soft prompts
 
-The authors compared prompt tuning to several other methods for a range of model sizes. In this figure from the paper, you can see the Model size on the X axis and the SuperGLUE score on the Y axis. This is the evaluation benchmark you learned about earlier this week that grades model performance on a number of different language tasks. The red line shows the scores for models that were created through full fine tuning on a single task. While the orange line shows the score for models created using multitask fine tuning. The green line shows the performance of prompt tuning and finally, the blue line shows scores for prompt engineering only. As you can see, prompt tuning doesn't perform as well as full fine tuning for smaller LLMs. However, as the model size increases, so does the performance of prompt tuning. And once models have around 10 billion parameters, prompt tuning can be as effective as full fine tuning and offers a significant boost in performance over prompt engineering alone.
+The authors compared prompt tuning to several other methods for a range of model sizes. In this figure from the paper, you can see the Model size on the X axis and the SuperGLUE score on the Y axis. 
+
+<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-07_at_4.35.03_PM.png" width="80%" />
+
+This is the evaluation benchmark you learned about earlier this week that grades model performance on a number of different language tasks. The red line shows the scores for models that were created through full fine tuning on a single task. While the orange line shows the score for models created using multitask fine tuning. The green line shows the performance of prompt tuning and finally, the blue line shows scores for prompt engineering only. As you can see, prompt tuning doesn't perform as well as full fine tuning for smaller LLMs. However, as the model size increases, so does the performance of prompt tuning. And once models have around 10 billion parameters, prompt tuning can be as effective as full fine tuning and offers a significant boost in performance over prompt engineering alone.
