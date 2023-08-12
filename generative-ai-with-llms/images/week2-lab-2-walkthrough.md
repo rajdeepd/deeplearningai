@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Lab 2 walkthrough
-nav_order: 9
+nav_order: 11
 description: "Lab 2 walkthrough"
 has_children: false
 parent: Week2
@@ -24,40 +24,40 @@ Now we are actually going to modify the weights of our language model, specific 
 
 Real quick, just double-check that you have the eight CPU, 32 gigabyte, that's the instance type here. This is an AWS instance type from SageMaker, ml.m5.2xl. 
 
-<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-09_at_7.23.20_PM.png" />" />
+<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-09_at_7.23.20_PM.png" />
 
 Let's do this pip installs. While the pip installs are happening, let me explain torch and torchdata the same as Lab 1 where we are going to use PyTorch, we are then pip installing the torchdata library to help with the PyTorch data loading. 
 
-<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-09_at_7.24.02_PM.png" />" />
+<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-09_at_7.24.02_PM.png" />
 
 There's also a library called evaluates, and this is what we're going to use with our rouge score to calculate rouge. You learned about rouge in the lessons as a way to measure how well does a summary encapsulate what was in the original conversation or the original text. 
 
 
 You learned about rouge in the lessons as a way to measure how well does a summary encapsulate what was in the original conversation or the original text. Now, these two libraries, LoRA and PEFT, you heard about a bit in the lessons.
 
-<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-09_at_7.24.24_PM.png" />" />
-<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-09_at_7.24.34_PM.png" />" />
+<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-09_at_7.24.24_PM.png" />
+<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-09_at_7.24.34_PM.png" />
 
 
 
 This is what we will use to do the parameter efficient fine-tuning. Now, I'm going to do some imports here from those pip installs. If you do see this, sometimes this clean data in minutes thing shows up here, you don't need this for the lab. If you see it, I think this comes up whenever we import pandas, just click the "X" and click "Don't Show Again" because we're not using that part of SageMaker. Once again, we have the `AutoModelForSeq2Seq``. 
 
-<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-09_at_9.44.31_PM.png" />" />
+<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-09_at_9.44.31_PM.png" />
 
 This is what's going to give us access to **Flan-T5** through the transformers python library, the tokenizer, we use generation config in the previous lab. Now we're going to see two new classes, one called `TrainingArguments`, one called `Trainer`. These are all from transformers, these are always we can use that simplifies our code when we're trying to train our language model or fine-tune our language model.
 
 
  We see that we are going to import PyTorch and the evaluate, and we will use I believe pandas and numpy later on. Let's load the dataset just like we did in the first lab.
 
-<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-09_at_7.24.48_PM.png" />" />
+<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-09_at_7.24.48_PM.png" />
 
 Let's load the model just like we did in the first lab and the tokenizer, and this is called the original model and this will be useful later when we compare all the different fine-tuning strategies to the original model that is not fine-tuned. Here is a convenience function that prints out all of the parameters that are in the model and specifically the trainable parameters.
 
-<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-09_at_7.25.28_PM.png" />" />
+<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-09_at_7.25.28_PM.png" />
 
 This will become useful when we introduce the PEFT version of the model which does not train all of the parameters. Here we see there are approximately 250 million parameters being trained when we do the full fine-tuning, which is the first part of this lab where we full fine-tune. The second part of the lab will be where we do the parameter efficient fine-tuning specifically with LoRA, where we will only train very small number. So keep that in mind, this is a kind of a lot of messy code but it's pretty useful for the comparison. Just like we did in the first lab, we're going to show a sample input. We're going to show the human baseline. We're going to do the zero shot.
 
-<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-10_at_8.33.29_PM.png" />" />
+<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-10_at_8.33.29_PM.png" />
 
 
 
@@ -67,7 +67,7 @@ Here is a convenience function that can tokenize and wrap our dataset in a promp
 
 As we saw in the first lab where we had a prompt that said summarize the following conversation, and then we're actually going to give it the dialogue, and then we're going to end the prompt with those summary colon. This function will let us map over all of the elements of our dataset and convert them into prompts with instruction.
 
-<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-10_at_8.53.05_PM.png" />" />
+<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-10_at_8.53.05_PM.png" />
 
 That's what we're going to do here, which is full fine-tuning with instruction prompts. Here, we're just going to take a sample just to keep the resource requirements law for this particular lab, speed things up a little bit. Let's take a look at the size. Here we have about 125 training examples. We're going to use five for validation. We're going to use 15 to actually do our holdout test later on when we compare. 
 
@@ -79,7 +79,7 @@ That's what we're going to do here, which is full fine-tuning with instruction p
 
 We're going to fine tune with the training and we're going to validate with the validation. Then when all of that said and done, we're then going to use the 15 test examples to then compare the different strategies for fine-tuning with instruction. Here we see training arguments and we see some defaults here for the learning rate. We see some pretty low values for the max steps and the number of the epochs.
 
-<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-10_at_8.53.18_PM.png" />" />
+<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-10_at_8.53.18_PM.png" />
 <img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-10_at_8.54.03_PM.png" />" width="150%"/>
 
 That's because we do want to try to minimize the amount of compute that's needed for this lab. If you have more time, you can certainly change these values and bump them up to maybe five epochs, maybe max steps 100. In a bit, I'll show you how we actually work around that.
