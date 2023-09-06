@@ -96,4 +96,18 @@ Now let's return to the challenge of fitting models into GPU memory and take a l
 
 Sources: [hugging face transformer docs](https://huggingface.co/docs/transformers/v4.20.1/en/perf train gpu one\#tanatomy-of-models-memory, https://github.com/facebookresearch/bitsandbytes)
 
+## GPU RAM needed to train larger models
 
+Note that in all these cases you still have a model with one billion parameters. 
+
+<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-25_at_10.00.48_PM.png" width="80%" />
+<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-25_at_10.01.19_PM.png" width="80%" />
+<img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-08-25_at_10.01.42_PM.png" width="80%" />
+
+As you can see, the circles representing the models are the same size. Quantization will give you the same degree of savings when it comes to training. As you heard earlier, you'll quickly hit the limit of a single NVIDIA A100 GPU with 80 gigabytes of memory. When you try to train a one billion parameter model at 32-bit full precision, you'll need to consider using either 16-bit or eight bit quantization if you want to train on a single GPU and remember, many models now have sizes in excess of 50 billion or even 100 billion parameters. Meaning you'd need up to 500 times more memory capacity to train them, tens of thousands of gigabytes. These enormous models dwarf the one billion parameter model we've been considering, shown here to scale on the left.
+
+As modal scale beyond a few billion parameters, it becomes impossible to train them on a single GPU. Instead, you'll need to turn to distributed computing techniques while you train your model across multiple GPUs. This could require access to hundreds of GPUs, which is very expensive. Another reason why you won't pre-train your own model from scratch most of the time.
+
+## Fine Tuning
+
+However, an additional training process called fine-tuning, which you'll learn about next week. Also require storing all training parameters in memory and it's very likely you'll want to fine tune a model at some point. To help you understand more about the technical aspects of training across GPUs, we've prepared an optional video for you. It's very detailed, but it will help you understand some of the options that exist for developers like you to train larger models. You should feel free to skip this video. But if you're interested in learning more, I hope you'll check it out.
