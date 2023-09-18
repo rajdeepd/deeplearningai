@@ -81,7 +81,7 @@ The Chinchilla paper hints that many of the 100 billion parameter large language
 
 ## Chinchilla scaling laws for model and dataset size
 
-n this table, you can see a selection of models along with their size and information about the dataset they were trained on. One important takeaway from the Chinchilla paper is that the optimal training dataset size for a given model is about 20 times larger than the number of parameters in the model. Chinchilla was determined to be compute optimal. 
+In this table, you can see a selection of models along with their size and information about the dataset they were trained on. One important takeaway from the Chinchilla paper is that the optimal training dataset size for a given model is about 20 times larger than the number of parameters in the model. Chinchilla was determined to be compute optimal. 
 
 
 <img src="/deeplearningai/generative-ai-with-llms/images/Screenshot_2023-09-08_at_8.09.24_PM.png" width="80%" />
