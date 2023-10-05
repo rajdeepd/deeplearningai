@@ -299,9 +299,12 @@ demo = gr.Interface(fn=ner,
 demo.launch(share=True, server_port=int(os.environ['PORT4']))
 
 ```
-Tthe code here is removing them and then joining the tokens into a single This code is also taking average of the score, but since the app isn't 
+The code here is removing them and then joining the tokens into a single This code is also taking average of the score, but since the app isn't 
 displaying the score, it can just ignore that for now. And 
 that's it! 
+
+
+ <img src="/deeplearningai/huggingface-gradio/images/Screenshot_2023-09-29_at_8.56.56_PM.PNG" width="80%" />
 
 We have our named entity recognition app. Congratulations on 
 building your first two Gradio apps. I would encourage you to try to find a sentence or try to come up with a sentence that has some entities, like maybe your name, where you live, or where you work. And test the model on that and see how this behaves. And one last thing before we wrap this lesson, because we open so many ports with multiple Gradle apps, you may want to clean up your ports by running Gradle Close All function. In the next lesson, you'll go beyond text input by building an image captioning app that takes an image and outputs text that describes that 
