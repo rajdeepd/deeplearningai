@@ -6,4 +6,5 @@ description: ""
 has_children: false
 parent:  Pair Programming LLM 
 ---
+Introduction to pair programming with Palm.
 
