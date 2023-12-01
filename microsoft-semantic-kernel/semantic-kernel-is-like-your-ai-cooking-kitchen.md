@@ -24,7 +24,15 @@ Secondly, it's semantic. Why is it semantic? Why did we use that word? It's beca
 
 So semantic was a word we used for semantic kernel. And it's got a job. 
 
-The job is to be your amazing kitchen to take any kind of sort of test kitchen recipes and bring it all the way to production. Not just production to serve like five people at your house, but to serve five million people all over the world. So let's jump into Notebook. So every Notebook is a bit daunting but as you know, you want to bring in things into the world as import and you give it a short name. I'm going to import semantic kernel. I'm going to make a kernel and then I'm going to want to connect the kernel with some model. I'm use this syntax because I'm calling the OpenAI settings from dotenv and I'm going to add to the kernel a text completion service that we're going to give it a label OpenAI. We're going to make sure we clarify that it is a. OpenAI chat completion. 
+The job is to be your amazing kitchen to take any kind of sort of test kitchen recipes and bring it all the way to production. Not just production to serve like five people at your house, but to serve five million people all over the world. 
+
+### What is Semantic Kernel's Job
+
+<img src="/deeplearningai/microsoft-semantic-kernel/images/Screenshot_2023-11-26_at_9.19.50 AM.png" />
+
+## Notebook
+
+So let's jump into Notebook. So every Notebook is a bit daunting but as you know, you want to bring in things into the world as import and you give it a short name. I'm going to import semantic kernel. I'm going to make a kernel and then I'm going to want to connect the kernel with some model. I'm use this syntax because I'm calling the OpenAI settings from dotenv and I'm going to add to the kernel a text completion service that we're going to give it a label OpenAI. We're going to make sure we clarify that it is a. OpenAI chat completion. 
 
 ```python
 import semantic_kernel as sk
