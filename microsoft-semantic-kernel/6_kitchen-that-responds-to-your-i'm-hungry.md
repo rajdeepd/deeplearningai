@@ -71,7 +71,7 @@ the time and to play with text.
 
 
 
-
+## Create planner with Single function
 
  
 Next we're going to do is we're going to use the planner to create a one, mind you, a one function, a single function that's gonna be pulled out of a vat of plugins to use. 
@@ -132,6 +132,9 @@ print(f"🧲 The best single function to use is `{plan._skill_name}.{plan._funct
 ```
 
 Pretty cool, right? Again, it's very limited. It's no insult to you, computer. It's just not that smart. 
+
+## Sequential Planner
+
 But when you can do that, a simple planner, you can imagine a planner that is much more powerful. 
 And so the action planner is good for like a very basic searching through, find just one function. 
 But what if I wanted to do a multi-step plan that's automatically generated, right? 
@@ -139,8 +142,7 @@ Let's do that.
 So what we're gonna do is we're going to pull in the sequential planner. The sequential planner is our gen two planner. There's a gen three planner that is, it's been ported from C-sharp. so it'll be coming in the repo shortly. Again, this is all open source, so you can get access to the latest and greatest as it comes out.
 
 
-And all I'm gonna do is I'm going to bring in the literate friend plugin that I have. 
-The literate friend plugin has a few functions. One, it can write poetry, it can translate, but I'm gonna hold onto that. 
+And all I'm gonna do is I'm going to bring in the literate friend plugin that I have. The literate friend plugin has a few functions. One, it can write poetry, it can translate, but I'm gonna hold onto that. 
 
 **Note**: The next two cells will *sometimes return an error*. The LLM response is variable and at times can't be successfully parsed by the planner or the LLM will make up new functions.  If this happens, try resetting the jupyter notebook kernel and running it again.
 
@@ -175,25 +177,17 @@ display(Markdown(f"## ✨ Generated result from the ask: {ask}\n\n---\n" + str(r
 
 Next we are going to make a sequential planner. Before we made an action planner. 
 
-I want it to do the following. 
-Tomorrow is Valentine's day. I need to come up with a poem. Translate the poem to French. This essentially gonna require two 
-plugins, essentially one that can write the poem and the other that can translate. 
+I want it to do the following. Tomorrow is Valentine's day. I need to come up with a poem. Translate the poem to French. This essentially gonna require two plugins, essentially one that can write the poem and the other that can translate. 
 I'm going to call the planner. 
 
-All right, so we're gonna create plan, async. 
-You know, we're built, we're architected in C-sharp where people 
-ask, why is there a wait and like async everywhere? 
- 
-You know, this is enterprise software, people doing stuff. 
-So I apologize, but in the end, you will thank us for all of our attendance to things that can happen asynchronously 
-because we live in a network world, right? 
+We're gonna create plan, async. Why is there a wait and like async everywhere? 
+ This is enterprise software, people doing stuff. 
 
-Let us print out the plan steps.  So let's see what happens. 
-I'm going to bring in the literate friend plugin. 
+Let us print out the plan steps.  We are going to bring in the literate friend plugin. 
 It's got three functions. 
-One is able to write a poem, one is able to translate. I think the other one is to summarize something, 
+One is able to write a poem, one is able to translate. Third one is to summarize something, 
 
-I'm gonna ask it to make a plan to address this ask and let's see what happens. If things work out the way we want, it's gonna realize that I 
+I'm going to ask it to make a plan to address the ask and let's see what happens. If things work out the way we want, it's going to realize that I 
 need to write a poem and I need to translate it and so it pulled out two functions to use and you're like well great well can you use them absolutely so what I want to do is see what happens what happens when I have it actually tell me what it created and it 
 says tomorrow's the Valentine's. I need to come up with a poem, that's my ask.
 
@@ -224,6 +218,8 @@ display(Markdown(f"## ✨ Generated result from the ask: {ask}\n\n---\n" + str(r
 ```
 
 It made a poem and then it translated it to French. Now let's do that in super slow motion.
+
+## Sequential planner with Tracing
 
 Let's print out the results step-by-step. So I have a little trace results. 
 You can look at the code later, but I'm gonna step through the plan and look at different things inside it and look at the input variables and output variables as they change. 
