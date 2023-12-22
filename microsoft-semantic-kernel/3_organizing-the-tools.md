@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Organizing your tools
-nav_order: 5
+nav_order: 3
 description: ".."
 has_children: false
 parent:  Coursera - Microsoft Semantic Kernel

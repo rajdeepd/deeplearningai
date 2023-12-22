@@ -1,6 +1,6 @@
 ---
 layout: default
-title: A kitchen that responds to your “I’m hungry”
+title: 6 Single and Sequential planner”
 nav_order: 6
 description: ".."
 has_children: false

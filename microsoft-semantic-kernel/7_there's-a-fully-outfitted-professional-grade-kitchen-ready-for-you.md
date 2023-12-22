@@ -6,17 +6,7 @@ description: ".."
 has_children: false
 parent:  Coursera - Microsoft Semantic Kernel
 ---
-You're still here, which means you're kind of hopeful there's a little 
-more. Well, this kitchen is a big kitchen. It's a professional-grade kitchen. 
-Now, that you've started, you can go off and bring in all kinds of 
-components that make your AI kitchen better than 
-anyone else's, And you know the secret. So, let's 
-take you through the secret hallways of the kitchen to get 
-you ready to make even bigger, brighter, bolder 
-meals. So, you walk through the planner door with me 
-and now you understand the t-shirt I wore 
-in the intro and in some of the front bumpers you 
-can see, plugins and planners and personas are the key thematic 
+Plugins and planners and personas are the key thematic 
 areas of Semantic Kernel. 
  
 You jumped into plugins deeply, and now you're into the planner world 
