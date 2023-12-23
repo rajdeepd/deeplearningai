@@ -266,6 +266,39 @@ preso_result = await kernel.run_async(pluginFC["Presentation"], input_context=my
 
 display(Markdown("# ✨ Generated presentation ...\n"+str(preso_result)))
 ```
+✨ Leveraging information available to address 'How can the business owner save time?'...
+  > 🧲 Hit 1: opportunity-2 
+  > 🧲 Hit 2: opportunity-0 
+  > 🧲 Hit 3: opportunity-1 
+✨ Synthesizing human-readable business-style presentation...
+
+```
+Business Strategy Consultant Presentation
+Summary
+The business owner has asked for ways to save time. We will explore three key concerns that can help the business owner save time and improve operations.
+
+The Question
+How can the business owner save time?
+
+Three Key Concerns
+Streamlining online presence and order capabilities
+Tapping into catering potential
+Targeting the growing local tech startup community
+Streamlining Online Presence and Order Capabilities
+The business can save time by exploring new technologies or systems to enhance operations. By improving the online presence and order capabilities, the business can attract entirely new customers. For example, implementing an online ordering system can save time by reducing the need for phone orders and manual data entry.
+
+Tapping into Catering Potential
+The business can save time by exploring new products or services, such as catering. By tapping into the untapped catering potential, the business can attract entirely new customers and increase revenue. For example, offering catering services can save time by streamlining the ordering process and reducing the need for individual orders.
+
+Targeting the Growing Local Tech Startup Community
+The business can save time by targeting under-served customer segments or market areas. By targeting the growing local tech startup community, the business can attract entirely new customers and increase revenue. For example, offering discounts or promotions to local tech startups can save time by reducing the need for individual marketing efforts.
+
+Summary
+By streamlining online presence and order capabilities, tapping into catering potential, and targeting the growing local tech startup community, the business owner can save time and improve operations.
+
+
+```
+
 
 Let's see how this works. 
 So first off, it's used a similarity engine 
