@@ -425,6 +425,6 @@ JOBS
 tru.get_leaderboard(app_ids=[])
 ```
 
-Screenshot_2023-12-25_at_5.01.34 PM.png
+<img src="/deeplearningai/building-evaluating-advanced-rag/images/Screenshot_2023-12-25_at_5.01.34 PM.png  width="80%" />
 
 An example question response pair is what is the importance of networking in AI networking is important in AI as it helps in building a strong professional networking community. Now that we've run all three retrieval techniques, the basic rag pipeline, as well as the two advanced retrieval methods. We can view a comprehensive leader board to see how all three techniques stack up. We get pretty nice results for the auto version query engine. On top of the evaluation questions, we get 100% in terms of ground in this 94% in terms of a relevance and 43% in terms of context relevance, which is higher than both the sentence window and the baseline rack pipeline. And we get roughly equivalent total costs to a sentence by Prairie Engine implying that the retrieval here is more efficient with equivalent latency. And at the end, you can view this in the dashboard as well. This lesson gives you a comprehensive overview of how to set up a basic and advanced Rag pipeline and also how to set up evaluation modules to measure performance. In the next lesson, Aon will do a deep dive into these evaluation modules, specifically the Rag triad of gravis answer relevance and context relevance. And you'll learn a bit more about how to use these modules and what each module means.
