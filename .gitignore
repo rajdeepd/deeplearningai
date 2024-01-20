@@ -4,3 +4,6 @@ _site
 .jekyll-metadata
 vendor
 .DS_Store
+milvus/python/.idea/
+milvus/volumes
+milvus/notebooks/venv/
