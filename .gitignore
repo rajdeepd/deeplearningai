@@ -7,3 +7,4 @@ vendor
 milvus/python/.idea/
 milvus/volumes
 milvus/notebooks/venv/
+milvus/python/__pycache__/
