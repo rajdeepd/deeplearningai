@@ -20,7 +20,7 @@ COUNT = 100  # How many titles to embed and insert.
 MILVUS_HOST = 'localhost'  # Milvus server URI
 MILVUS_PORT = '19530'
 OPENAI_ENGINE = 'text-embedding-ada-002'  # Which engine to use
-openai.api_key = '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'  # Use your own Open AI API Key here
+openai.api_key = ''  # Use your own Open AI API Key here
 
 # Connect to Milvus
 connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)

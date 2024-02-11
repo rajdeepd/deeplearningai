@@ -1,3 +1,4 @@
+
 from pymilvus import (
     Milvus,
     connections,
@@ -5,15 +6,10 @@ from pymilvus import (
     FieldSchema, CollectionSchema, DataType,
     Collection,
 )
-from pymilvus import list_collections
-fmt = "\n=== {:30} ===\n"
-print(fmt.format("start connecting to Milvus"))
 connections.connect("default", host="localhost", port="19530")
+utility.drop_collection("jeopardy")
+
+print('after delete')
 
 collections_response = utility.list_collections(timeout=None, using='default')
 print(collections_response)
-#for r in collections_response:
-#    print(r)
-
-collection = Collection("jeopardy_db")
-print(collection.schema)
