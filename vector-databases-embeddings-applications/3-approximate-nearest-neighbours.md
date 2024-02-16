@@ -4,7 +4,7 @@ title: 3. Approximate Nearest Neighbors
 nav_order: 3
 description: ".."
 has_children: true
-parent:  Vector Databases
+parent:  Vector Databases and Embeddings - Weaviate
 ---
 
 In this lesson you will get a theoretical and 

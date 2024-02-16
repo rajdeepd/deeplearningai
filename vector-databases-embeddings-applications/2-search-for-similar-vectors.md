@@ -4,7 +4,7 @@ title: 2. Search for Similar Data
 nav_order: 3
 description: ".."
 has_children: false
-parent:  Vector Databases
+parent:  Vector Databases and Embeddings - Weaviate
 ---
 
 In this lesson, you build an intuition of vector or semantic search using the brute-force k-nearest-neighbors algorithm. You code up an implementation of brute-force KNN, and see how it can be used to accurately obtain the nearest vectors in embedding space to a query vector. You then explore the issues around the runtime complexity of the brute-force KNN algorithms and this leads you to the class of approximate nearest-neighbors algorithms that lie at heart of vector database technology. All right, let's dive in. 

@@ -4,7 +4,7 @@ title: 4. Vector Databases Details
 nav_order: 4
 description: ".."
 has_children: true
-parent:  Vector Databases
+parent: Vector Databases and Embeddings - Weaviate
 ---
 
 ## Introduction

@@ -1,10 +1,10 @@
 ---
 layout: default
-title: 0. Introduction
+title: 1. Introduction
 nav_order: 1
 description: ".."
 has_children: false
-parent:  Vector Databases
+parent:  Vector Databases and Embeddings - Weaviate
 ---
 
 Hi, and welcome to this course, Vector Databases from Embeddings to Applications, this has been built in partnership with Weaviate. 
