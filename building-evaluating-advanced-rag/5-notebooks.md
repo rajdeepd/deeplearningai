@@ -9,4 +9,4 @@ parent:  Deeplearning RAG
 
 * [L1 Advanced RAG Pipeline](./notebooks/L1-Advanced_RAG_Pipeline.ipynb)
 * [L2 RAG Triad of Metrics](./notebooks/L2-RAG_Triad_of_metrics.ipynb)
-* [L3 Auto Merging Retrieval](./notebooks/L4-Auto-merging_Retrieval.ipynb)
+* [L4 Auto Merging Retrieval](./notebooks/L4-Auto-merging_Retrieval.ipynb)
