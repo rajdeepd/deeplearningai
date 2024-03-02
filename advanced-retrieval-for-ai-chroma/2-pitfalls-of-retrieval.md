@@ -211,11 +211,11 @@ Visualizing the projection of data is an effective method to develop intuitions 
 To illustrate the impact of irrelevant queries, consider querying a system about Michael Jordan's contributions to Microsoft's annual report from 2022. As expected, such a query is highly unlikely to yield relevant results, demonstrating the retrieval system's function to return the nearest neighbors, even when the query is unrelated to the dataset. This underscores the importance of query relevance in the context of RAG loops.
 
 
+![alt text](image.png)
+
 I mentioned earlier, understanding and debugging from both the application user's and developer's perspectives can be very difficult when dealing with irrelevant queries and results. To address these challenges, examining the projection can offer insights.
 
 After projecting, the visualization reveals that results concerning Michael Jordan scatter widely, which aligns with expectations given the irrelevance of the query to the dataset. Encouraging the exploration of various queries and their impact on the results' structure can be enlightening. By experimenting with different queries, you can observe how they position within the dataset and what the returned results reveal about the information in those specific areas.
 
 This lab has illustrated how a basic embedding space retrieval system might return distracting or irrelevant results, even for straightforward queries. It also introduced a method to visualize data to develop an understanding of the reasons and mechanisms behind the results returned. In the forthcoming lab, techniques to enhance the quality of your queries using Large Language Models (LLMs) through query expansion will be explored, offering strategies to refine the retrieval process further.
 
-
-![alt text](image.png)
