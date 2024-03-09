@@ -53,6 +53,7 @@ But for the purposes of this course, that's all the setup required. If you're ru
 
 
 #### Use the embeddings model
+
 To compute an embedding, here's the process: Assign the variable embedding by invoking the embedding model to obtain an embedding. We'll begin with the simple word "life" as our input. Following that, we set vector to embedding[0].values, which effectively pulls the numerical values from the embedding. Then, we'll display the dimensionality of vector by printing its length, and also show the first 10 elements of this vector. In this case, vector is a 768-dimensional vector, and we're looking at its first 10 elements. You're encouraged to print more elements if you're curious about the full array of numbers.
 
 
@@ -98,7 +99,7 @@ Length = 768
 
 ##### Generate a sentence embedding.
 
-Next, we'll explore how to compare the similarity between different embeddings. For this, we'll employ the cosine similarity measure from the scikit-learn library. This method normalizes two vectors to unit length and then calculates their dot product as a means to gauge their similarity. We'll compute embeddings for three sentences, including "What is the meaning of life? Is it 42, or is it something else?" For those unfamiliar, the reference to "42" is a nod to a famous novel, a fun fact you might enjoy looking up online using the number "42" as your query.
+
 
 ```python
 embedding = embedding_model.get_embeddings(
@@ -120,9 +121,9 @@ Length = 768
 
 #### Similarity
 
-Additionally, we'll embed the phrase "How does one spend their time well on Earth?" which intriguingly mirrors the existential query, "What's the meaning of life?" Our third sentence for comparison is "Would you like a salad?" followed by a humorous reflection, "I hope the meaning of my life is much more than eating salads." This third sentence, while slightly related, hopefully doesn't bear too much resemblance to the first one in terms of meaning. Following the same procedure as before, we'll extract the vectors from these embeddings. Next, I will calculate and display the similarity scores for each pair of sentences. Upon recalculating, we observe that the similarity score between the first and second sentences (Vec1 and Vec2) is relatively high, at 0.655, indicating that the question of life's meaning is perceived to be closely related to how one might best utilize their time on Earth. 
+Next, we'll explore how to compare the similarity between different embeddings. For this, we'll employ the cosine similarity measure from the scikit-learn library. This method normalizes two vectors to unit length and then calculates their dot product as a means to gauge their similarity. We'll compute embeddings for three sentences, including "What is the meaning of life? Is it 42, or is it something else?" For those unfamiliar, the reference to "42" is a nod to a famous novel, a fun fact you might enjoy looking up online using the number "42" as your query.
 
-
+Additionally, we'll embed the phrase "How does one spend their time well on Earth?" which intriguingly mirrors the existential query, "What's the meaning of life?" Our third sentence for comparison is "Would you like a salad?" followed by a humorous reflection, "I hope the meaning of my life is much more than eating salads." This third sentence, while slightly related, hopefully doesn't bear too much resemblance to the first one in terms of meaning. Following the same procedure as before, we'll extract the vectors from these embeddings.
 
 ```python
 from sklearn.metrics.pairwise import cosine_similarity
@@ -149,6 +150,9 @@ vec_3 = [emb_3[0].values]
 vec_1 = [emb_1[0].values]
 ```
 
+ Next, I will calculate and display the similarity scores for each pair of sentences. Upon recalculating, we observe that the similarity score between the first and second sentences (Vec1 and Vec2) is relatively high, at 0.655, indicating that the question of life's meaning is perceived to be closely related to how one might best utilize their time on Earth. 
+
+
 
 
 ```python
@@ -165,14 +169,26 @@ Output of the cosine similarity
 [[0.54139322]]
 ```
 
+
 The similarity scores between sentences 2 and 3, and between sentences 1 and 3, are 0.52 and 0.54, respectively, suggesting that the first two sentences share more in meaning than either does with the third.
 
 This demonstrates that even in the absence of common words, the first two sentences are deemed more similar to each other than either is to the third sentence. I encourage you to pause here and experiment by typing different sentences into the Jupyter Notebook. Try sentences related to your favorite programming language, algorithm, animals, or weekend activities, and see how the system evaluates their similarity. It's noteworthy that while cosine similarity theoretically ranges from 0 to 1, due to the high-dimensional nature of these 768-dimensional vectors, the resulting similarity scores tend to cluster within a narrower range. You're unlikely to encounter scores at the extreme ends of the scale, but even within this confined spectrum, the distinctions in similarity can be quite revealing.
 
 #### From word to sentence embeddings
-- One possible way to calculate sentence embeddings from word embeddings is to take the average of the word embeddings.
-- This ignores word order and context, so two sentences with different meanings, but the same set of words will end up with the same sentence embedding.
 
+
+A common approach in natural language processing is to create individual embeddings for each word in a sentence and then combine these to form a single vector representation for the entire sentence. For instance, by averaging the embeddings of each word in the phrase "the kids play in the park" to derive a unified sentence vector. However, simply averaging the embeddings can lead to a loss of valuable context, as it treats all words equally and fails to capture the nuanced relationships between them.
+
+When embeddings for words in a sentence are averaged, the resulting vector often has the same value for identical words across different instances. This is because the operation does not consider the position or function of the word within the sentence, leading to a loss of the unique meaning that may be imparted by the syntax or word order.
+
+In contrast, more advanced embedding techniques consider the full sentence structure, recognizing the importance of word order and the role of function words like "the", "is", "at", which are often disregarded in simpler models. These sophisticated models result in embeddings that reflect a deeper understanding of sentence semantics, distinguishing, for example, between "the kids play in the park" as an activity and "the play was for kids in the park" as a performance event.
+
+To explore the capabilities of these models, you're encouraged to experiment by inputting different sentences and observing how the embeddings reflect the inherent meaning. By examining the first few elements or the entire array of the vector, you can gain insight into how different sentences are encoded by the embedding process. This exercise will help you appreciate the complexity and power of sentence-level embeddings over word-level averaging.
+
+Let's take a deeper look at why sentence embeddings are more powerful, I think, than word embeddings. Let's look at another two different inputs. First input, the kids play in the park. You know, during recess, the kids play in the park. And in the second input is the play was for kids in the park. So, someone puts on a play that is a show for a bunch of kids to watch. If you were to remove what's called stop words, so stop words like the, in, for, and is, those are words that are often perceived to have less semantic meaning in English sometimes. 
+
+But if you were to remove the stop words from both of these sentences, you really end up with an identical set of three words. Kids play park and play kids park. Now, let's compute the embedding of the words in the first inputs. I'm gonna do a little bit of data wrangling in a second. So, I'm gonna import the NumPy library. And then, let me use this code snippet to call the embedding model on the first input, kids play park.
+And then, the rest of this code here using an iterator and then NumPy stack, It's just a little bit of data wrangling to reformat the outputs of the embedding model into a 3 by 768 dimensional array. So, that just takes the embeddings and puts it in $a$, in an array like that. If you want, feel free to pause the video and print out the intermediate values to see what this is doing. But now, let me just do this as well for the second input. So, embedding array 2 is another 3 by 768 dimensional array. And there are three rows because there are three embeddings, one for each of these three words.
 
 ```python
 in_1 = "The kids play in the park."
@@ -202,13 +218,14 @@ import numpy as np
 emb_array_1 = np.stack(embeddings_1)
 print(emb_array_1.shape)
 ```
-
+    (3, 768)
 
 ```python
 embeddings_2 = [emb.values for emb in embedding_model.get_embeddings(in_pp_2)]
 emb_array_2 = np.stack(embeddings_2)
 print(emb_array_2.shape)
 ```
+    (3, 768)
 
 - Take the average embedding across the 3 word embeddings 
 - You'll get a single embedding of length 768.
@@ -218,7 +235,7 @@ print(emb_array_2.shape)
 emb_1_mean = emb_array_1.mean(axis = 0) 
 print(emb_1_mean.shape)
 ```
-
+    (768,)
 
 ```python
 emb_2_mean = emb_array_2.mean(axis = 0)
@@ -231,8 +248,21 @@ emb_2_mean = emb_array_2.mean(axis = 0)
 print(emb_1_mean[:4])
 print(emb_2_mean[:4])
 ```
+    [-0.00385805 -0.00522636  0.00574341  0.03331106]
+    [-0.00385805 -0.00522636  0.00574341  0.03331106]
+
+So, one way that many people used to build sentence level embeddings is to, then take these three embeddings for the different words and to average them together. So, if I were to say the embedding for my first input, the kids play in the park after stop word removal. So, kids play park is, I'm going to take the embedding array one, and take the mean along $\mathrm{x}$ is zero. So that just averages it across the three words we have. And, you know, do the same for my second embedding. If I then print out the two embedding vectors, not surprisingly, you end up with the same value. So, because these two lists have exactly the same words, when you embed the words, and then average the embeddings of the individual words, you end up with very similar sentence embeddings for sentences that have quite different meanings. This illustrates a significant limitation of traditional word embedding approaches when applied to sentence-level understanding: the inability to capture the context and semantic relationships between words effectively.
 
 #### Get sentence embeddings from the model.
+
+Word embeddings represent words in a high-dimensional space, where each dimension captures some aspect of the word's meaning. These embeddings are trained on large corpora of text, learning representations that encapsulate a word's relationships and associations with other words. However, when used to construct sentence embeddings by averaging the embeddings of individual words, the resulting vector loses much of the context and nuance. As your example illustrates, despite the two sentences having distinct meanings, the process of averaging word embeddings fails to differentiate between the contexts in which "play" is used—as a verb in one sentence and as a noun in another.
+
+Sentence embeddings aim to overcome these limitations by encoding entire sentences, capturing not just the presence of words but also the context in which they appear. Models designed for generating sentence embeddings, such as BERT (Bidirectional Encoder Representations from Transformers) and its variants, are trained to understand the meaning of sentences by considering the words in context. This training allows these models to capture the subtleties and nuances that differentiate sentences with similar words but different meanings.
+
+
+
+
+
 - These sentence embeddings account for word order and context.
 - Verify that the sentence embeddings are not the same.
 
@@ -256,7 +286,8 @@ vector_2 = embedding_2[0].values
 print(vector_2[:4])
 ```
 
+    [0.0039385221898555756, -0.020830577239394188, -0.002994248876348138, -0.007580515928566456]
+    [-0.01565515622496605, -0.012884826399385929, 0.01229254249483347, -0.0005865463172085583]
 
-```python
+The power of sentence embeddings lies in their ability to encapsulate the semantic meaning of a sentence as a whole, including the relationships between words and the overall context. This is particularly important for applications requiring a deep understanding of text, such as question answering, text summarization, and natural language inference. By capturing the nuanced differences between sentences that may share similar words, sentence embeddings enable more sophisticated and accurate natural language processing tasks.
 
-```
