@@ -8,3 +8,8 @@ milvus/python/.idea/
 milvus/volumes
 milvus/notebooks/venv/
 milvus/python/__pycache__/
+google-cloud-vertex-ai-embeddings/keys 
+google-cloud-vertex-ai-embeddings/notebooks/data 
+google-cloud-vertex-ai-embeddings/notebooks/.ipynb_checkpoints
+
+
