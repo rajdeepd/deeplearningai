@@ -91,6 +91,24 @@ print("Shape: " + str(embeddings_array.shape))
 print(embeddings_array)
 ```
 
+
+```
+Shape: (7, 768)
+[[ 0.04559246 -0.01472285 -0.02949955 ...  0.04057328 -0.03193641
+  -0.01936668]
+ [-0.01995482  0.00037652  0.0116593  ...  0.02617216 -0.03978169
+  -0.02036468]
+ [ 0.01030084  0.02219611  0.02433357 ...  0.03538613 -0.0273955
+  -0.04193578]
+ ...
+ [-0.0263201  -0.01767797 -0.01261324 ... -0.01372547  0.00060259
+   0.01581882]
+ [-0.00561961 -0.02237099 -0.03271009 ... -0.02777804 -0.03388645
+  -0.01553735]
+ [ 0.00867064 -0.0131854   0.04283332 ... -0.04224638  0.01800203
+   0.01088098]]
+```
+
 #### Reduce embeddings from 768 to 2 dimensions for visualization
 
 Next, we aim to visualize these seven embeddings. However, directly visualizing a 768-dimensional vector on a two-dimensional computer screen is not feasible. To address this, we'll employ a method known as PCA, or Principal Components Analysis. For those already familiar with PCA, you'll know its utility; for others, no need to worry. Essentially, PCA is a technique used to reduce the dimensionality of high-dimensional data (like our 768-dimensional embeddings) down to two dimensions, making it possible to visualize on our screens.
@@ -108,6 +126,17 @@ If you're curious about diving deeper into PCA (Principal Components Analysis), 
 ```python
 print("Shape: " + str(new_values.shape))
 print(new_values)
+```
+
+```
+Shape: (7, 2)
+[[-0.40980753 -0.10084478]
+ [-0.39561909 -0.18401444]
+ [-0.29958523  0.07514691]
+ [ 0.16077688  0.32879395]
+ [ 0.1893873   0.48556638]
+ [ 0.31516547 -0.23624716]
+ [ 0.4396822  -0.36840086]]
 ```
 
 We then employ matplotlib, a widely-used plotting library, to create a 2D visualization of these embeddings, mapping each of the now two-dimensional vectors onto a graph. This visualization clusters similar sentences closer together, demonstrating the model's ability to group related concepts. For example, sentences related to animals cluster together, as do those related to food or programming, illustrating the embedding's effectiveness in capturing semantic similarities.
@@ -173,12 +202,14 @@ plot_heatmap(embeddings_array, y_labels = y_labels, title = "Embeddings Heatmap"
 ```
 
 Note: the heat map won't show everything because there are 768 columns to show.  To adjust the heat map with your mouse:
+
 - Hover your mouse over the heat map.  Buttons will appear on the left of the heatmap.  Click on the button that has a vertical and horizontal double arrow (they look like axes).
 - Left click and drag to move the heat map left and right.
 - Right click and drag up to zoom in.
 - Right click and drag down to zoom out.
 
 #### Compute cosine similarity
+
 - The `cosine_similarity` function expects a 2D array, which is why we'll wrap each embedding list inside another list.
 - You can verify that sentence 1 and 2 have a higher similarity compared to sentence 1 and 4, even though sentence 1 and 4 both have the words "desert" and "plant".
 
@@ -200,6 +231,14 @@ print(in_2)
 print(compare(embeddings,0,1))
 ```
 
+```text
+He couldn’t desert 
+          his post at the power plant.
+The power plant needed 
+          him at the time.
+[[0.80995305]]
+```
+
 
 ```python
 print(in_1)
@@ -207,8 +246,15 @@ print(in_4)
 print(compare(embeddings,0,3))
 ```
 
+```
+He couldn’t desert 
+          his post at the power plant.
+Desert plants can 
+          survive droughts.
+[[0.48815018]]
+```
 
 
-Feel encouraged to explore these pairwise similarities further. Before concluding this video, I must note a critical caveat regarding our visualization method. Though we've used this technique for illustrative purposes, it's important to recognize that it doesn't hold complete mathematical validity. To delve a bit into the technical side for a moment—and it's perfectly fine if the following details seem complex—the orientation of the axes in an embedding space is essentially arbitrary, subject to change due to random rotations. This means that while calculating pairwise similarity between embeddings is a robust and meaningful operation, interpreting individual components of an embedding, such as a single value on a heat map, can be misleading. These components can't easily be tied to specific, interpretable features, making such visualizations more of an informal tool for gaining insights into embeddings rather than a precise analytical method.
+Feel encouraged to explore these pairwise similarities further. Before concluding this section, I must note a critical caveat regarding our visualization method. Though we've used this technique for illustrative purposes, it's important to recognize that it doesn't hold complete mathematical validity. To delve a bit into the technical side for a moment—and it's perfectly fine if the following details seem complex—the orientation of the axes in an embedding space is essentially arbitrary, subject to change due to random rotations. This means that while calculating pairwise similarity between embeddings is a robust and meaningful operation, interpreting individual components of an embedding, such as a single value on a heat map, can be misleading. These components can't easily be tied to specific, interpretable features, making such visualizations more of an informal tool for gaining insights into embeddings rather than a precise analytical method.
 
 If the technical details are a bit much, no worries. The essential point is that these visualizations should be viewed as informal tools for understanding embedding behavior, not definitive guides. Different embedding models might produce varying visualizations, but the underlying concept—that certain sentences share closer similarities in the embedding space—remains valid and insightful.
