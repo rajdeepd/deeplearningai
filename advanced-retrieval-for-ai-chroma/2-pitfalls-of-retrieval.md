@@ -73,7 +73,7 @@ Sometimes there are unusual structures because a two-dimensional projection cann
 
 So let's revisit our original query, the one used in our RAG example, "What's the total revenue?" We're going to do the same thing as we did last time: query the Chroma Collection with this query, ask for five results, and include the documents and the embeddings because we'd like to see the comparison.
 
-<img src="/deeplearningai/advanced-retrieval-for-ai-chroma/images/output_8_1.png" width="80%" />
+<img src="/deeplearningai/advanced-retrieval-for-ai-chroma/images/L2_output_8_1.png" width="80%" />
 
 to use those embeddings for visualization. And so we're going to grab our retrieved documents out of the results again, and let's print them out. We see again, the same results as we saw before. Retrieval is deterministic in this case, and we see that there are several revenue-related documents, but also there are things here that might not be directly related to revenue. We see things like potentially costs, things that are to do with money, but not necessarily revenue. So let's take a look at how this query actually looks when visualized. We're going to grab the embedding for our query using the embedding function, and we're going to grab our retrieved embeddings as well, which we get from our result.
 
@@ -83,13 +83,13 @@ We're going to use our projection function to project both of these down to two 
 
 So let's go ahead and see what that looks like. 
 
-<img src="/deeplearningai/advanced-retrieval-for-ai-chroma/images/output_11_1.png" width="80%" />
+<img src="/deeplearningai/advanced-retrieval-for-ai-chroma/images/L2_output_11_1.png" width="80%" />
 
 This is a visualization of the query and the retrieved embeddings. You can see the query here is this red X. And the green circles basically circle those data points that we actually end up retrieving. Notice that it doesn't look in the projection like these are the actually nearest neighbors. But remember, we're trying to squash down many, many higher dimensions into this two-dimensional representation. So it's not always going to be perfect.
 
 But the important thing is to basically look at the structure of these results. And you can see some are more outlier than others. And this is actually the heart of the entire issue. The embedding model that we use to embed queries and embed our data does not have any knowledge of the task or query we're trying to answer at the time we actually retrieve the information.
 
-<img src="/deeplearningai/advanced-retrieval-for-ai-chroma/images/output_14_1.png" width="80%" />
+<img src="/deeplearningai/advanced-retrieval-for-ai-chroma/images/L2_output_14_1.png" width="80%" />
 
 So the reason that a retrieval system may not perform the way that we expect is because we're asking it to perform a specific task using only a general representation. And that makes things more complicated. Let's try visualizing a couple other queries in a similar way. So here I'm just going to copy-paste the whole thing. But the query now is what's the strategy around artificial intelligence, that is AI. So let's run and see what results we get. You see here that AI is mentioned in most of these documents. And this is sort of vaguely related to AI. We have a commitment to responsible AI development. But then we have something about this information about a database which is not directly related to AI. And here we're talking about mixed reality applications and metaverse, which is tangentially related to technology investments, but not necessarily directly AI related. So let's visualize.
 

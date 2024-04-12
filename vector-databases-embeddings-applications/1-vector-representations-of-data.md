@@ -334,6 +334,8 @@ The length of the shortest path between two points or vectors.
 
 ``python
 # Euclidean Distance
+
+```python
 L2 = [(zero_A[i] - zero_B[i])**2 for i in range(len(zero_A))]
 L2 = np.sqrt(np.array(L2).sum())
 print(L2)
