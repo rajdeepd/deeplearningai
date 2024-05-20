@@ -363,8 +363,6 @@ Four and a seven, which should be used as a negative example.
 That is basically what we will use for pushing and pulling to train this, neural network.
 
 
-
-
 ## Build Neural Network Architecture
 
 
@@ -570,6 +568,8 @@ def load_model_from_checkpoint():
     return net
 ```
 
+![
+](image.png)
 Now, run the following code to get your model.
 And by default, this will try and load the model from the checkpoint.
 However, if you would like to run the full training
@@ -616,3 +616,145 @@ else:
     # the following line will show a pre-saved loss curve from the checkpoint data.
     display(Image(filename="images/loss-curve.png", height=600, width=600))
 ```
+
+<img src="/deeplearningai/building-multimodal-search-and-rag-weaviate/images/1-loss-curve.png" />
+
+There was only minute changes and improvements over time.
+
+## Visualize the Vector Space!
+
+You have a trained neural network, you can visualize the vector space and see what was actually learned.
+To visualize the vector space you need to take the training dataset and then encoded all with the model.
+As a result, you get 64 dimensional vector representation of the data.
+You also need the labels for each item, so that you could display each digit in a different color.
+
+
+### Generate 64d Representations of the Training Set
+
+Let us run our encoded data, together with the labels, this shouldn't take too long so just bear with it.
+Because we don't see the world in 64 dimensions, you need to do another further dimensionality reduction step.
+
+
+
+```python
+encoded_data = []
+labels = []
+
+with torch.no_grad():
+    for anchor, _, _, label in tqdm(trainLoader):
+        output = model(anchor.to(device))
+        encoded_data.extend(output.cpu().numpy())
+        labels.extend(label.cpu().numpy())
+
+encoded_data = np.array(encoded_data)
+labels = np.array(labels)
+```
+
+### Reduce Dimensionality of Data: 64d -> 3d
+
+Here you're going to use a concept called Principal Component Analysis and this will take you from 64 dimensions to three dimensions
+which we should be able to see.
+Now that you have the 3D vectors, you can actually visualize this data in an interactive scatter plot.
+
+
+```python
+# Apply PCA to reduce dimensionality of data from 64d -> 3d to make it easier to visualize!
+pca = PCA(n_components=3)
+encoded_data_3d = pca.fit_transform(encoded_data)
+```
+
+### Interactive Scatter Plot in 3d – with PCA
+
+Take the three dimensional data that you reduce in the previous step across $x, y$ and $z$ axis, use it to create a Plotly graph object layout.
+When you plot this out, you see the vectors plotted on this graph, where each color represents different point for a different digit.
+So, in here we have sevens. we have threes and twos and sixes etc..
+Because you use cosine distance metric for the training, the embeddings for similar digits align in a spoke or let's say line shape rather than a cluster like this six digits here.
+And this is because cosine distances depend on angles between embeddings, unlike Euclidean distance, which minimizes proximity.
+
+
+```python
+scatter = go.Scatter3d(
+    x=encoded_data_3d[:, 0],
+    y=encoded_data_3d[:, 1],
+    z=encoded_data_3d[:, 2],
+    mode='markers',
+    marker=dict(size=4, color=labels, colorscale='Viridis', opacity=0.8),
+    text=labels, 
+    hoverinfo='text',
+)
+
+# Create layout
+layout = go.Layout(
+    title="MNIST Dataset - Encoded and PCA Reduced 3D Scatter Plot",
+    scene=dict(
+        xaxis=dict(title="PC1"),
+        yaxis=dict(title="PC2"),
+        zaxis=dict(title="PC3"),
+    ),
+    width=1000, 
+    height=750,
+)
+
+# Create figure and add scatter plot
+fig = go.Figure(data=[scatter], layout=layout)
+
+# Show the plot
+fig.show()
+```
+
+What we see on the graph. One note though, because we compress the vectors from 64 dimensions to three dimensions, it still may look like, maybe some of the, embeddings are kind of, like, still very close to each other, like this two and four.
+It kind of depends on which angle you are looking at, at this, but also reducing it from 64 dimension to three dimensions can do it, like that.
+But the overall like for most of the digits, you can very visibly see how each of them is pointing in a different direction. As you would expect from a cosine based training.
+
+### Scatterplot in 2d - with UMAP
+
+Now you will look at a technique called UMAP, to visualize the train embeddings on a 2D space. Notice that the metric provided here is set to cosine.
+This is really important to know because UMAP defaults to Euclidean distance, which wouldn't give you an accurate view of the vector embedding space.
+
+```python
+mapper = umap.UMAP(random_state=42, metric='cosine').fit(encoded_data)
+umap.plot.points(mapper, labels=labels);
+```
+
+> Note: Please be aware that the output from the previous cell may differ from what is shown in the video. This variation is normal and should not cause concern. Also the previous cell might take some minutes to run.
+
+### UMAP with Euclidian Metric
+
+
+```python
+mapper = umap.UMAP(random_state=42).fit(encoded_data) 
+umap.plot.points(mapper, labels=labels);
+```
+
+> Note: Please be aware that the output from the previous cell may differ from what is shown in the video. This variation is normal and should not cause concern. 
+
+
+So let's run this, please note this can take half a minute, up to a minute to complete.
+Be patient and eventually
+he $2 \mathrm{D}$ plot will show.
+And in this chart, each digit is represented by a different color.
+Just like before.
+And you can see how digits are clustered in a jellyfish-like pattern.
+I guess, is where deep learning crosses over with, deep sea.
+You never know.
+But overall this demonstrates that the contrastive training was successful.
+And each digit a representation
+is clustered in a separate part of this vector space.
+And out of curiosity,
+if you run the same code without specifying the distance metric
+you map will use Euclidean distance, and you will get a bunch of strings.
+Like this ones.
+You can still see that those strings,
+are close together and they like, sort of follow each other.
+Who knows, maybe this is the answer to the string theory.
+I'm just kidding. Don't call Sheldon Cooper.
+Finally you have this video that you can play yourself to see the training process of the contrastive learning over 100 epochs.
+You can see how at the beginning the data
+points are all clustered together. But over time, similar embeddings get aligned while different numbers spread out in other directions.
+This is the effect of pooling similar examples closer together and pushing different examples further apart.
+In a nutshell, that's how contrastive training works.
+
+In this lesson, you've learned how to implement Contrastive Learning to train a neural network on an image data set.
+
+You learned also how pushing and pooling of negative and positive examples help train the model. Finally you use PCA and UMAP to plot reduced dimensionality vector embeddings to analyze the results of the training of a vector space.
+In the next lesson, you learn how to use a vector database with a multi-modal model to vectorize images and videos, and then search with text, image and video input.
