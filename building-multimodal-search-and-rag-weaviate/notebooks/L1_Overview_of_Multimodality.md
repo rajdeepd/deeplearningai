@@ -1,3 +1,13 @@
+---
+layout: default
+title: L1- Overview of Multimodality
+nav_order: 1
+description: "Notebooks"
+has_children: false
+parent:  N. Notebooks
+grand_parent: Building Multimodal Search and RAG - Weaviate
+---
+
 # L1: Overview of Multimodality
 
 <p style="background-color:#fff6e4; padding:15px; border-width:3px; border-color:#f5ecda; border-style:solid; border-radius:6px"> ⏳ <b>Note <code>(Kernel Starting)</code>:</b> This notebook takes about 30 seconds to be ready to use. You may start and watch the video while you wait.</p>

@@ -1,3 +1,12 @@
+---
+layout: default
+title: L2- Multimodal Search
+nav_order: 2
+description: "Notebooks"
+has_children: false
+parent:  N. Notebooks
+grand_parent: Building Multimodal Search and RAG - Weaviate
+---
 # L2: Multimodal Search
 
 <p style="background-color:#fff6e4; padding:15px; border-width:3px; border-color:#f5ecda; border-style:solid; border-radius:6px"> ⏳ <b>Note <code>(Kernel Starting)</code>:</b> This notebook takes about 30 seconds to be ready to use. You may start and watch the video while you wait.</p>
@@ -202,29 +211,7 @@ def file_to_base64(path):
         return base64.b64encode(file.read()).decode('utf-8')
 ```
 
-## Text to Media Search
 
-> Where the fun begins!
-
-
-```python
-animals = client.collections.get("Animals")
-
-response = animals.query.near_text(
-    query="dog playing with stick",
-    return_properties=['name','path','mediaType'],
-    limit=3
-)
-```
-
-
-```python
-for obj in response.objects:
-    json_print(obj.properties)
-    display_media(obj.properties)
-```
-
-> Note: Please be aware that the output from the previous cell may differ from what is shown in the video. This variation is normal and should not cause concern.
 
 ## Image to Media Search
 
