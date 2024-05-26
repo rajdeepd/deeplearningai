@@ -389,11 +389,15 @@ How about we use this image as an input for a query?
 # Use this image as an input for the query
 Image("./test/test-cat.jpg", width=300)
 ```
+
+
+
+<img src="/deeplearningai/building-multimodal-search-and-rag-weaviate/images/Screenshot_2024-05-24_at_11.26.24_AM.png"  width="100%"  />
+
 And a query this, is
 actually very similar, except this time we are calling new image
 and we are converting this file to base 64 format.
 So we are using the test cat and again return the same properties and iterate over all the objects. And let's execute it.
-And in response we get this cat, and two more, which basically shows that the search work really well.
 
 ```python
 # The query
@@ -408,11 +412,17 @@ for obj in response.objects:
     display_media(obj.properties)
 ```
 
+Response shows how well the search works
+
+<img src="/deeplearningai/building-multimodal-search-and-rag-weaviate/images/Screenshot_2024-05-24_at_11.26.58_AM.png"  width="50%"  />
+
+
 ## Image search - from web URL
 
 We are going to run a very similar query, except this time we'll call your URL to base64. But the rest of the query is pretty much the same. And if we execute this, we'll get these pictures of one meerkat that looks kind of angry but is all right. Don't worry about him. We have another one. Chilling.
 But the fun thing is that we also were able to match a video of a meerkat.
 So with that, we were able o actually do a multimodal search that we used images to find both other images and videos and this is very powerful.
+
 
 ```python
 Image("https://raw.githubusercontent.com/weaviate-tutorials/multimodal-workshop/main/2-multimodal/test/test-meerkat.jpg", width=300)
@@ -434,6 +444,9 @@ for obj in response.objects:
     json_print(obj.properties)
     display_media(obj.properties)
 ```
+
+<img src="/deeplearningai/building-multimodal-search-and-rag-weaviate/images/Screenshot_2024-05-24_at_11.13.27_PM.png"  width="50%"  />
+
 Now for something that is probably the hardest task or an LLM, which is to make a video search.
 So let's try to run the third with this video of these two meerkats
 
@@ -466,3 +479,146 @@ for obj in response.objects:
     # json_print(obj.properties)
     display_media(obj.properties)
 ```
+
+
+<img src="/deeplearningai/building-multimodal-search-and-rag-weaviate/images/Screenshot_2024-05-25_at_11.17.34_PM.png"  width="50%"  />
+<img src="/deeplearningai/building-multimodal-search-and-rag-weaviate/images/Screenshot_2024-05-25_at_11.17.48_PM.png"  width="50%"  />
+
+## Visualizing a Multimodal Vector Space
+
+In this part, what you want to see is actually how this vector space looks like when we are loading both video and image embeddings and how they actually live on the same space.
+For content there are similar. They should be next to each other.
+
+
+
+
+Let's start by loading some of the necessary libraries. And probably the most important one here is the UMAP, which allows us to reduce the dimensionality of the vector.
+We'll go from 1400 to 2 dimensions, which will allow us to actually plot it as an image, as a two dimensional image.
+
+> To make this more exciting, let's loadup a large dataset!
+
+
+```python
+import numpy as np
+import sklearn.datasets
+import pandas as pd
+import umap
+import umap.plot
+import matplotlib.pyplot as plt
+```
+
+## Load vector embeddings and mediaType from Weaviate 
+
+Now what we want to do is load the vector embeddings in a media type from Weaviate.
+We are using this iterator function which basically will go to all the objects that we have in our collection and then give us back vector embeddings, but also we can access all the properties like the media type.
+You can see here that we are not calling the animals collection anymore.
+We have a for your benefit because if we just try
+to visualize a vector spatial 15 objects, that's not going to be very exciting.
+So we pre-loaded this database with 14,000 images and videos
+so that we can actually get some better results.
+
+```python
+client.backup.restore(
+    backup_id="resources-img-and-vid",
+    include_collections="Resources",
+    backend="filesystem"
+)
+
+# It can take a few seconds for the "Resources" collection to be ready.
+# We add 5 seconds of sleep to make sure it is ready for the next cells to use.
+import time
+time.sleep(5)
+```
+
+So let's run this and then quickly pull all the vector embeddings together with some of the properties that we need.
+Now what we are going to do is set up a data frame with our embeddings together with the labels, which will act as a series.
+This line is what does the conversion from the 1400 dimension to two dimensions.
+
+
+```python
+# Collection named "Resources"
+collection = client.collections.get("Resources")
+
+embs = []
+labs = []
+for item in collection.iterator(include_vector=True):
+    #print(item.properties)\
+    labs.append(item.properties['mediaType'])
+    embs.append(item.vector)
+```
+
+
+```python
+embs2 = [emb['default'] for emb in embs]
+
+emb_df = pd.DataFrame(embs2)
+labels = pd.Series(labs)
+
+labels[labels=='image'] = 0
+labels[labels=='video'] = 1
+```
+
+>Note: this might take some minutes to complete the execution.
+
+
+```python
+%%time
+mapper2 = umap.UMAP().fit(emb_df)
+```
+
+## Plot the embeddings
+
+Don't worry, this actually should take a little while.
+Could be up to half a minute, but after that we should be good to go.
+Now that we have all the embeddings pre calculated and drop down to two dimensions, we could actually plot them.
+So this is the function that performs the plotting.
+If we run this, we get a nice vector space.
+Something that I haven't mentioned earlier, the data set that we prevent to write for this exercise actually came from ten different categories.
+So you can see how, like we said, a similar vector embeddings are always stored very close to each other.
+
+
+```python
+plt.figure(figsize=(10, 8))
+umap.plot.points(mapper2, labels=labels, theme='fire')
+
+# Show plot
+plt.title('UMAP Visualiztion of Embedding Space')
+plt.xlabel('UMAP Dimension 1')
+plt.ylabel('UMAP Dimension 2')
+plt.show();
+```
+
+## Interactive plot of vectors
+
+>Note: Once you run the following cell, please be aware that on the right-hand side,  there are special buttons available. These buttons enable you to perform various functions such as highlighting and more.
+
+
+```python
+umap.plot.output_notebook()
+
+p = umap.plot.interactive(mapper2, labels=labels, theme='fire')
+
+umap.plot.show(p)
+```
+
+<img src="/deeplearningai/building-multimodal-search-and-rag-weaviate/images/Screenshot_2024-05-25_at_11.18.09_PM.png"  width="100%"  />
+
+
+## Close the connection to Weaviate
+
+And then the final step that we have to do, and that's something that you always need to remember when you're done with this instance.
+What we have to do is just close it. So you can open it from another notebook.
+In this lesson, you learn how you could use
+a vector database with multimodal models, how you can
+vector write them and stored metadata together with the vector embeddings, and then use text and image and video search across all the modalities.
+But also we run a nice test and plotted
+14,000 different vector embeddings to show how similar vectors
+are grouped together, even if they come from different modalities.
+And in the next lesson, you learn about large
+multimodal models and how they work and how they get trained.
+So I will see you there.
+
+```python
+client.close()
+```
+
