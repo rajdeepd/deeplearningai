@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Introduction
+title: 1. Introduction
 nav_order: 1
 description: "Introduction"
 parent: Practical Multi AI Agents with crewAI

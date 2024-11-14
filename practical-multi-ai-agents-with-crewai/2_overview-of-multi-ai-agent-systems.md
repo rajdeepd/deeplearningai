@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Overview of Multi-Agent AI System
+title: 2. Overview of Multi-Agent AI System
 nav_order: 2
 description: "Overview of Multi-Agent AI System"
 parent: Practical Multi AI Agents with crewAI
@@ -41,11 +41,13 @@ It usually begins with extracting data from existing systems such as ERPs, CRMs,
 
 This data then undergoes a research phase, potentially involving document analysis, internet searches, or querying other systems.
 
+<img src="./images/Screenshot 2024-11-11 at 11.29.00 AM.png" width="100%"/>
+
 ### Analysis
 
 Next, the data is analyzed. T
 
-<img src="./images/Screenshot 2024-11-01 at 7.01.49 PM.png" width="100%"/>
+<img src="./images/Screenshot 2024-11-11 at 11.29.08 AM.png"/>
 
 This might involve comparisons, extractions, or inferring new information.
 
@@ -53,13 +55,13 @@ This might involve comparisons, extractions, or inferring new information.
 
 A summarization process typically follows, generating learnings, charts, or executive summaries as show in the figure below.
 
-<img src="./images/Screenshot 2024-11-01 at 7.02.02 PM.png" width="100%"/>
+<img src="./images/Screenshot 2024-11-11 at 11.29.15 AM.png"/>
 
 ### Reporting
 
 Finally, the process concludes with reporting, often delivered as a PDF, JSON, or markdown file, which can then be integrated into another system.  
 
-<img src="./images/Screenshot 2024-11-01 at 7.02.19 PM.png" width="100%"/>
+<img src="./images/Screenshot 2024-11-11 at 11.29.21 AM.png"/>
 
 Regardless of the specific industry—sales, marketing, HR, etc.—most use cases involve some combination of research, analysis, summarization, and reporting.  While not every use case follows this exact sequence, it represents the majority of observed applications. 
 
@@ -71,12 +73,8 @@ Some companies push boundaries with innovative applications using video and imag
 For those new to multi-agent systems and CrewAI, we will explore their nature and construction. 
 
 
-<img src="./images/Screenshot 2024-11-01 at 7.05.52 PM.png" width="100%"/>
-
 Traditional apps, built by engineers, are strongly typed, meaning the input data and its transformations are well-defined.  A typical example is a lead form processing system, where specific input triggers predetermined automations and outputs.  AI apps, however, differ significantly.
 
-
-<img src="./images/Screenshot 2024-11-01 at 7.06.00 PM.png" width="100%"/>
 
 
 <!--5:09--->
