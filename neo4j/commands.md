@@ -25,3 +25,5 @@ Status: Downloaded newer image for neo4j:5.26.0
 2025-01-07 14:37:24.555+0000 INFO  creationDate: 2025-01-07T14:37:23.363Z
 2025-01-07 14:37:24.555+0000 INFO  Started.
 
+
+docker run -d --name neo4j -e NEO4J_AUTH=neo4j/neo4j -p 7474:7474 -p 7687:7687 -v /Users/rajdeepd/data/neo4j_pubmed/data neo4j_pubmed

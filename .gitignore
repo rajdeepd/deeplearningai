@@ -11,5 +11,6 @@ milvus/python/__pycache__/
 google-cloud-vertex-ai-embeddings/keys 
 google-cloud-vertex-ai-embeddings/notebooks/data 
 google-cloud-vertex-ai-embeddings/notebooks/.ipynb_checkpoints
+knowledge-graphs-rag-neo4j/notebooks/.ipynb_checkpoints/
 
 
