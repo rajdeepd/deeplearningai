@@ -11,7 +11,7 @@ In this lesson, you'll get a full overview of how to set up both the basic and a
 
 Going through the **injection** phase. We first load in a set of documents. For each document, we split it into a set of tax trunks using a tax splitter. Then for each chunk, we generate an embedding for that trunk using an embedding model. And then for each chunk with embedding, we offload it to an index which is a view of a storage system such as a vector database. Once the data is stored within the index, we then perform retrieval against that index. 
 
-<img src="/deeplearningai/building-evaluating-advanced-rag/images/Screenshot_2023-12-23_at_12.14.45 PM.png" width="80%" />
+<img src="./images/Screenshot_2023-12-23_at_12.14.45 PM.png" width="80%" />
 
 <p align="Center"><i>Figure 1: Ingestion Process</i></p>
 
