@@ -77,17 +77,27 @@ To get this notebook started, we're going to import some packages that we need f
 
 On the left here, we've got some person nodes. We know that they acted in some movies. The actor becomes an actor because they've acted in something. If you can read that out as a sentence, of course, it's that a person acted in a movie. That's the fundamental pattern that we'll be looking for when we're dealing with this dataset.
 
+<img src="./images/2.1-movie-knowledge-graph.png" width="75%"/>
+
 ### Node Properties: Persons and Movies
 
-For both of those nodes, for the persons and the movies, we know that they have properties. The properties that are available for the person or that they all have names. They also have a born value which is just the. The movies have a title and tagline, both as strings, and they also have a release date, also just an integer about the year the movie was released.
+For both of those nodes, for the persons and the movies, we know that they have properties. The properties that are available for the person or that they all have names. They also have a born value which is just the. 
+
+<img src="./images/2.2-node-properties.png" width="75%"/>
+
+The movies have a title and tagline, both as strings, and they also have a release date, also just an integer about the year the movie was released.
 
 ### Relationships in the Graph
 
-And finally, just in the same way that I mentioned that a person acted in a movie, there's more relationships that a person might have with a movie. We know that they've acted in a movie. A person might also have directed that movie. Sometimes for some movies, we know that a person both acted in and directed a movie. Also, they might have written a movie. That's all the different relationships between the persons and the movies within this data set. But then, the persons themselves have a relationship with other persons. Here is the idea that if somebody has reviewed a movie, somebody else might be a follower of that reviewer. And so, what those persons' roles are, the relationships around them to the movies and to each other persons is what really determines the type of a person that they are or the job that they have or their behaviors within the data set. It's worth observing, of course, that these are potential relationships. The actual relationships themselves for particular people on particular movies ends up being dynamic based on the data itself. So now, you have some idea about what the graph looks like.
+And finally, just in the same way that I mentioned that a person acted in a movie, there's more relationships that a person might have with a movie. We know that they've acted in a movie. A person might also have directed that movie. Sometimes for some movies, we know that a person both acted in and directed a movie. Also, they might have written a movie. That's all the different relationships between the persons and the movies within this data set. But then, the persons themselves have a relationship with other persons. 
+
+<img src="./images/2.3-all-relationships.png" width="75%"/>
+
+Here is the idea that if somebody has reviewed a movie, somebody else might be a follower of that reviewer. And so, what those persons' roles are, the relationships around them to the movies and to each other persons is what really determines the type of a person that they are or the job that they have or their behaviors within the data set. It's worth observing, of course, that these are potential relationships. The actual relationships themselves for particular people on particular movies ends up being dynamic based on the data itself. So now, you have some idea about what the graph looks like.
 
 ### Cypher: The Query Language
 
-### Querying the movie knowledge graph 
+#### Querying the movie knowledge graph 
 
 And the querying that we're gonna be doing is based on Cypher. Cypher is Neo4j's query language. It is using pattern matching to find things inside of the grass. It looks like this.
 
