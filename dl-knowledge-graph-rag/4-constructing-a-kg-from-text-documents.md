@@ -1019,6 +1019,16 @@ prettychain(question)
     management, cloud storage, and cloud operations.
 
 
+### Displaying the Response
+
+We can see that NetApp's primary business is enterprise storage and data management, cloud storage, and cloud operations. We have an actual answer to the question, not just raw text that might contain it. This is the intended use for the Large Language Model (LLM).
+
+### Testing Another Question
+
+Let's try another question to see the result. We will check if it can identify NetApp's headquarters. The response states it is headquartered in San Jose, California. That is correct.
+
+
+Let's see the output. The response is technically a single sentence, although a bit rambling, indicating compliance with instructions.
 
 ```python
 prettychain("Where is Netapp headquartered?")
@@ -1040,6 +1050,10 @@ prettychain("""
     applications and data across hybrid multicloud environments.
 
 
+### Addressing Hallucination
+
+We will now ask about a different company, one that sounds similar to NetApp: Apple, the computer company. The description of Apple appears very similar to that of NetApp. This is a clear instance of hallucination by the model.
+
 
 ```python
 prettychain("""
@@ -1054,3 +1068,10 @@ prettychain("""
     across hybrid multicloud environments.
 
 
+### Improving Response with Prompt Engineering
+
+To address this, we will apply more prompt engineering. We will instruct the model: "If you are unsure about the answer, say you don't know." This results in a much better and more honest answer from the LLM. This demonstrates effective prompt engineering.
+
+### Transition to Knowledge Graph Features
+
+In this lesson, Neo4j has been used primarily as a vector store, not fully leveraging its capabilities as a knowledge graph. In the next lesson, we will add relationships to the nodes, enhancing the chat application with more graph-specific power.
