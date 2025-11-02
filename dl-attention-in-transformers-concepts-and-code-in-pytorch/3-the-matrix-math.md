@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Main Ideas behind Transformers and Attention
+title: Matrix Math of Self Attention
 nav_order: 2
 description: ""
 has_children: false
@@ -111,15 +111,23 @@ So, in order to keep our examples small enough that we can easily calculate thin
 
 Anyway, in order to create the queries for each word, we stack the encodings in a matrix and multiply that matrix by a two-by-two matrix of **query weights** to calculate two query numbers per word.
 
+<img src="./images/maths-fig17.png"/>
 
+<img src="./images/maths-fig18.png"/>
 
 (Note: We multiplied the encoded values by a two-by-two matrix because we started with two encoded values per word, and a two-by-two matrix allows us to end up with two query numbers per word. If instead, we had started with 512 word embeddings per word, and thus 512 encoded values per word, then a common thing to do would be to use a 512 by 512 matrix to create 512 query numbers per word. That being said, the only rule that you really have to follow is that the matrix math has to be possible.)
 
+<img src="./images/maths-fig19.png"/>
+
 (Also, I want to point out that I've labeled the query weights matrix with the transpose symbol. This is because PyTorch prints out the weights in a way that requires them to be transposed before we can get the math to work out correctly. Small Bam!)
+
+<img src="./images/maths-fig20.png"/>
 
 Now we create the **keys** by multiplying the encoded values by a two-by-two matrix of **key weights**, and we create the **values** by multiplying the encoded values by a two-by-two matrix of **value weights**.
 
+<img src="./images/maths-fig22.png"/>
 
+<img src="./images/maths-fig23.png"/>
 ---
 
 ### Calculating Self-Attention: Step-by-Step
