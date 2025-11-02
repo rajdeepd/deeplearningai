@@ -16,11 +16,15 @@ All right, let's go.
 
 At first glance, the equation for calculating self-attention can be a little intimidating.
 
+<img src="./images/maths-fig1.png"/>
 
 But don't worry, we're going to break it down into small, easy-to-understand pieces. We'll start with these variables:
+
 * **Q** stands for **Query**.
 * **K** stands for **Key**.
 * **V** stands for **Value**.
+
+<img src="./images/maths-fig2.png"/>
 
 ---
 
@@ -28,41 +32,85 @@ But don't worry, we're going to break it down into small, easy-to-understand pie
 
 The terms query, key, and value come from database terminology. So let's talk about databases for a little bit.
 
+<img src="./images/maths-fig3.png"/>
+
+
+
 Imagine we had a database of guests at a hotel that paired each guest's last name with their room number.
+
+
+
 
 Now imagine Stat Squatch is working at the desk one night, and I check in and tell Squatch my last name: "Starmer." However, instead of correctly spelling my last name *Starmer*, Squatch types *Stammer* into the computer.
 
+<img src="./images/maths-fig4.png"/>
+
+<img src="./images/maths-fig5.png"/>
+
 Now the computer has to figure out what last name in the database is closest to whatever Squatch typed in.
 
-* In database terminology, what Squatch typed in—the search term—is called the **query**.
+* In database terminology, what is typed in—the search term—is called the **query**.
 * And the actual names in the database that we are searching are the **keys**.
+
+
 
 So the computer compares the query ("Stammer") to all of the keys in the database and ranks each one. In this case, the query "Stammer" is closest to the key for "Starmer."
 
 And so the computer returns my room number: 537.
+
+<img src="./images/maths-fig6.png"/>
+
 * In database terminology, we'd call the room number the **value**.
+
+<img src="./images/maths-fig7.png"/>
 
 To summarize the database terminology:
 > The **query** is the thing we are using to search the database.
 > The computer calculates similarities between the query and all of the **keys** in the database.
 > And the **values** are what the database returns as the results of the search. Bam!
 
+<img src="./images/maths-fig8.png"/>
+
 ---
 
 ### Creating Q, K, and V for Transformers
 
-Going back to the equation for self-attention, we now have a better idea of what the Q, K, and V variables refer to. Now let's talk about how we determine the queries, keys, and values in the context of a transformer.
+Going back to the equation for self-attention, we now have a better idea of what the Q, K, and V variables refer to. 
 
-First, let's remember that self-attention calculates similarity between each word and itself and all of the other words, and self-attention calculates these similarities for every word in the sentence. And that means we need to calculate a query and a key for each word. And just like we saw in the database example, each key needs to return a value.
+
+<img src="./images/maths-fig9.png"/>
+
+<!--Now let's talk about how we determine the queries, keys, and values in the context of a transformer.-->
+
+<img src="./images/maths-fig10.png"/>
+
+First, let's remember that self-attention calculates similarity between each word and itself and all of the other words, and self-attention calculates these similarities for every word in the sentence. 
+
+<img src="./images/maths-fig11.png"/>
+
+And that means we need to calculate a query and a key for each word. And just like we saw in the database example, each key needs to return a value.
+
+<img src="./images/maths-fig12.png"/>
 
 So, in order to keep our examples small enough that we can easily calculate things by hand, let's use the prompt: **"Write a poem."**
+
+
+<img src="./images/maths-fig13.png"/>
 
 1.  Just like we saw in a previous lesson, the first thing a transformer does is convert each word in the prompt into **word embeddings**.
 2.  Then the transformer adds **positional encoding** to the word embeddings to get these numbers (or encodings) that represent each word in the prompt.
 
+<img src="./images/maths-fig14.png"/>
+
+<img src="./images/maths-fig15.png"/>
+
+
 (Note: In this simple example, we're just going to use two numbers to represent each word in the prompt. However, it's much more common to use 512 or more numbers to represent each word.)
 
+<img src="./images/maths-fig16.png"/>
+
 Anyway, in order to create the queries for each word, we stack the encodings in a matrix and multiply that matrix by a two-by-two matrix of **query weights** to calculate two query numbers per word.
+
 
 
 (Note: We multiplied the encoded values by a two-by-two matrix because we started with two encoded values per word, and a two-by-two matrix allows us to end up with two query numbers per word. If instead, we had started with 512 word embeddings per word, and thus 512 encoded values per word, then a common thing to do would be to use a 512 by 512 matrix to create 512 query numbers per word. That being said, the only rule that you really have to follow is that the matrix math has to be possible.)
