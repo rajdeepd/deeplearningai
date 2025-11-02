@@ -33,3 +33,4 @@ gem "jekyll-feed", "~> 0.17.0"
 # do not have a Java counterpart.
 # gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 gem "just-the-docs"
+gem "kramdown-math-katex"
