@@ -138,15 +138,39 @@ Now that we have the query, key, and values for each token, we can use them to c
 
 We start by multiplying the query matrix $Q$ by the transpose of the key matrix $K$.
 
+<img src="./images/maths-fig24.png"/>
+
 > **Squatch:** Why do we need to transpose $K$ when we do this multiplication?
 >
+
+<img src="./images/maths-fig25.png"/>
+
 > **Josh:** Well, in this specific case, the obvious thing is that the multiplication wouldn't work if we didn't transpose $K$...
 >
+
+<img src="./images/maths-fig26.png"/>
+
+
+<img src="./images/maths-fig27.png"/>
+
+
+<img src="./images/maths-fig28.png"/>
+
 > However, there's actually a much more important reason to transpose $K$. And to understand it, let's go through the multiplication one step at a time.
+
+<img src="./images/maths-fig29.png"/>
 
 We start with the first row in $Q$ (the query for the word "write") and the first column in $K$ transposed (the key for the word "write"). The matrix multiplication gives us the sum of these products, which is -0.09.
 
+<img src="./images/maths-fig30.png"/>
+
 This process of multiplying pairs of corresponding numbers together and adding them up... is called calculating a **dot product**. So -0.09 is the dot product of the query and the key for the word "write."
+
+<img src="./images/maths-fig31.png"/>
+
+<img src="./images/maths-fig32.png"/>
+
+<img src="./images/maths-fig33.png"/>
 
 **Dot products can be used as an unscaled measure of similarity between two things.** And this metric is closely related to something called the **cosine similarity**. The big difference is that the cosine similarity scales the dot product to be between -1 and 1. In contrast, the dot product similarity isn't scaled, so that makes -0.09 an unscaled similarity between the query and the key for the word "write."
 
@@ -154,10 +178,18 @@ Likewise, we calculate:
 * The unscaled dot product similarity between the query for "write" and the key for "a" is 0.06.
 * The unscaled dot product similarity between the query for "write" and the key for "poem" is -0.61.
 
+<img src="./images/maths-fig36.png"/>
+
+
+<img src="./images/maths-fig37.png"/>
+
 Likewise, we calculate the unscaled dot product similarities between the query for "a" and all of the keys, and the unscaled dot product similarities between the query for "poem" and all of the keys.
 
 Thus, by multiplying $Q$ by the transpose of $K$, we end up with the unscaled dot product similarities between all possible combinations of queries and keys for each word. Double bam!
 
+<img src="./images/maths-fig38.png"/>
+
+<img src="./images/maths-fig39.png"/>
 
 #### Step 2: Scale the Similarities
 
