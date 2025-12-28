@@ -4,6 +4,7 @@ title: 2-9- Image Classification Code Example
 nav_order: 9 
 description: ""
 has_children: false
+grand_parent: DL - Pytorch for Deep Learning
 parent: Module 2 - The PyTorch Workflow
 ---
 
