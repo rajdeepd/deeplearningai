@@ -20,4 +20,5 @@ This module covers data pipelines and data management techniques in PyTorch.
 5. [Bugproof Pipelines](3.5-bugproof-pipelines.html)
 6. [Lab: Data Management](3.6-data-management-lab.html)
 7. [Assignment](3.7-assignment.html)
+8. [Practice Quiz](3.8-quiz.html)
 
